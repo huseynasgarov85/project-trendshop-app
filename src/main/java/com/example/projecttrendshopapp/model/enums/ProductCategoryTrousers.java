@@ -1,4 +1,4 @@
-package com.example.projecttrendshopapp.model;
+package com.example.projecttrendshopapp.model.enums;
 
 public enum ProductCategoryTrousers {
     JEANS,

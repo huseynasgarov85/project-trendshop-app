@@ -1,6 +1,4 @@
-package com.example.projecttrendshopapp.model;
-
-import jakarta.persistence.Enumerated;
+package com.example.projecttrendshopapp.model.enums;
 
 public enum ProductCategoryShirt {
     T_SHIRT,
