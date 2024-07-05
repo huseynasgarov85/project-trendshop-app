@@ -17,5 +17,6 @@ public class ElectricalEquipmentsEntity {
     private ProductCategoryElectricalEquipments productCategoryElectricalEquipments;
     private String marka;
     private String name;
+    private Long count;
     private Double price;
 }

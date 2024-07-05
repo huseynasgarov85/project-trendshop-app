@@ -28,6 +28,7 @@ public class ErrorHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ExceptionDto handleException(Exception e){
         log.error(e.getMessage());
+        e.printStackTrace();
         return new ExceptionDto(e.getMessage());
     }
 

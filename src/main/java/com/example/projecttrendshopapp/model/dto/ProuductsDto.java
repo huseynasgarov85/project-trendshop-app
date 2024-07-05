@@ -7,5 +7,4 @@ import lombok.NoArgsConstructor;
 @Data
 public class ProuductsDto {
     private Long id;
-
 }

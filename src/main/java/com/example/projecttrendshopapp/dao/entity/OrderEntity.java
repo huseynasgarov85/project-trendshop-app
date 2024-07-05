@@ -1,12 +1,16 @@
 package com.example.projecttrendshopapp.dao.entity;
+
+import com.example.projecttrendshopapp.model.dto.Basket;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.mapping.Join;
+
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -14,7 +18,9 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "basket_id")
-    private BasketEntity basket;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UsersEntity users;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<BasketEntity> baskets;
 }

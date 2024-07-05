@@ -19,4 +19,5 @@ public class ShirtEntity {
     private String colour;
     private String marka;
     private Double balance;
+    private Long count;
 }

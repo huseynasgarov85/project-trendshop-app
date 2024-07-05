@@ -20,4 +20,5 @@ public class ShoesEntity {
     private Integer size;
     private Double balance;
     private String name;
+    private Long count;
 }

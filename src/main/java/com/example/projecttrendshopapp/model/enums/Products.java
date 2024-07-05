@@ -4,5 +4,5 @@ public enum Products {
     SHIRT,
     SHOES,
     TROUSERS,
-    CARDS
+    ELECTRICAL_EQUIPMENTS
 }

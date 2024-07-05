@@ -13,9 +13,14 @@ import java.util.List;
 public class BasketController {
     private final BasketService basketService;
 
-    @GetMapping()
+    @GetMapping("")
     public List<BasketDto> getAllBaskets(){
         return basketService.getAllBaskets();
+    }
+
+    @GetMapping("/{basketId}/user/{userId}/product/{productId}")
+   public List<BasketDto> getById(@PathVariable Long basketId,@PathVariable Long userId,@PathVariable Long productId){
+        return basketService.getById(basketId,userId,productId);
     }
     @GetMapping("/{basketId}")
     public BasketDto getById(@PathVariable Long basketId){

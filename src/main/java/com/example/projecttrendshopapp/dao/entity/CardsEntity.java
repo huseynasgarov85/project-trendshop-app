@@ -2,6 +2,7 @@ package com.example.projecttrendshopapp.dao.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.commons.lang3.builder.ToStringExclude;
 
 import java.time.LocalDate;
 
@@ -20,7 +21,8 @@ public class CardsEntity {
     private String cvv;
     private LocalDate expireDate;
     private Double cardBalance;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "users_id")
+    @ToStringExclude
     private UsersEntity users;
 }
