@@ -1,6 +1,5 @@
 package com.example.projecttrendshopapp.dao.entity;
 
-import com.example.projecttrendshopapp.model.dto.Basket;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +20,6 @@ public class OrderEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UsersEntity users;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<BasketEntity> baskets;
 }

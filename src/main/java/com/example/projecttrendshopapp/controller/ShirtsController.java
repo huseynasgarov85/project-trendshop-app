@@ -2,6 +2,7 @@ package com.example.projecttrendshopapp.controller;
 
 import com.example.projecttrendshopapp.model.dto.ShirtDto;
 import com.example.projecttrendshopapp.service.ShirtsService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,11 +24,11 @@ public class ShirtsController {
         return shirtsService.getById(shirtId);
     }
     @PostMapping()
-    public void addShirt(@RequestBody ShirtDto shirtDto){
+    public void addShirt(@RequestBody @Valid ShirtDto shirtDto){
         shirtsService.addShirt(shirtDto);
     }
     @PutMapping("/{shirtId}")
-    public void updateShirt(@RequestBody ShirtDto shirtDto,@PathVariable Long shirtId){
+    public void updateShirt(@RequestBody @Valid ShirtDto shirtDto,@PathVariable Long shirtId){
         shirtsService.updateShirt(shirtDto,shirtId);
     }
     @DeleteMapping("/{shirtId}")

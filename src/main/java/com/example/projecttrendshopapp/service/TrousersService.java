@@ -27,10 +27,7 @@ public class TrousersService {
 
     public TrousersDto getById(Long trouserId) {
         log.info("ActionLog.getById.started:trouserId {}", trouserId);
-        var trouserEntity = trousersRepository.findById(trouserId).orElseThrow(() -> {
-            log.error("Action is failed trouserId:{}", trouserId);
-            return new NotFoundException("trouserId not found");
-        });
+        var trouserEntity = trousersRepository.findById(trouserId).orElseThrow(() ->new NotFoundException("trouserId not found"));
         var trouserDto = trousersMapper.mapToDto(trouserEntity);
         log.info("ActionLog.getById.end:trouserId {}", trouserId);
         return trouserDto;
@@ -45,10 +42,7 @@ public class TrousersService {
 
     public void updateTrouser(TrousersDto trousersDto,Long trouserId){
         log.info("ActionLog.updateTrouser.started:trouserId {},trousersDto{}",trouserId,trousersDto);
-        var trouserEntity = trousersRepository.findById(trouserId).orElseThrow(() -> {
-            log.error("Action is failed trouserId:{}", trouserId);
-            return new NotFoundException("trouserId not found");
-        });
+        var trouserEntity = trousersRepository.findById(trouserId).orElseThrow(() ->new NotFoundException("trouserId not found"));
         trousersMapper.mapToEntity(trouserEntity,trousersDto);
         trousersRepository.save(trouserEntity);
         log.info("ActionLog.updateTrouser.end:trouserId {},trousersDto {}",trouserId,trousersDto);

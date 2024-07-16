@@ -2,7 +2,7 @@ package com.example.projecttrendshopapp.controller;
 
 import com.example.projecttrendshopapp.model.dto.CardsDto;
 import com.example.projecttrendshopapp.service.CardService;
-import lombok.Getter;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +23,11 @@ public class CardController {
         return cardService.getById(cardId);
     }
     @PostMapping()
-    public void addCards(@RequestBody CardsDto cardsDto){
+    public void addCards(@RequestBody @Valid CardsDto cardsDto){
         cardService.addCard(cardsDto);
     }
     @PutMapping("/{cardId}")
-    public void updateCard(@RequestBody CardsDto cardsDto,@PathVariable Long cardId){
+    public void updateCard(@RequestBody @Valid CardsDto cardsDto,@PathVariable Long cardId){
         cardService.updateCard(cardsDto,cardId);
     }
     @DeleteMapping("/{cardId}")
@@ -35,7 +35,7 @@ public class CardController {
         cardService.removeCard(cardId);
     }
     @PostMapping("/users/{userId}")
-    public void addCardsToUser(@PathVariable Long userId,@RequestBody CardsDto cardsDto){
+    public void addCardsToUser(@PathVariable Long userId,@RequestBody @Valid CardsDto cardsDto){
         cardService.addCardsToUser(userId,cardsDto);
     }
 }

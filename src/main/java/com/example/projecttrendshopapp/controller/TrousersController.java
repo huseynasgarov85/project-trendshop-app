@@ -1,6 +1,7 @@
 package com.example.projecttrendshopapp.controller;
 import com.example.projecttrendshopapp.model.dto.TrousersDto;
 import com.example.projecttrendshopapp.service.TrousersService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +22,11 @@ public class TrousersController {
        return trousersService.getById(trouserId);
     }
     @PostMapping()
-    public void addTrouser(@RequestBody TrousersDto trousersDto){
+    public void addTrouser(@RequestBody @Valid TrousersDto trousersDto){
         trousersService.addTrouser(trousersDto);
     }
     @PutMapping("/{trouserId}")
-    public void updateTrouser(@RequestBody TrousersDto trousersDto,@PathVariable Long trouserId){
+    public void updateTrouser(@RequestBody @Valid TrousersDto trousersDto,@PathVariable Long trouserId){
         trousersService.updateTrouser(trousersDto,trouserId);
     }
     @DeleteMapping("/{trouserId}")

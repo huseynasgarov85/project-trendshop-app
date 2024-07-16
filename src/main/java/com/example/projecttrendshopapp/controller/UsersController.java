@@ -3,6 +3,7 @@ package com.example.projecttrendshopapp.controller;
 import com.example.projecttrendshopapp.model.dto.SendToUserBalanceDto;
 import com.example.projecttrendshopapp.model.dto.UsersDto;
 import com.example.projecttrendshopapp.service.UsersService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,12 +26,12 @@ public class UsersController {
     }
 
     @PostMapping()
-    public void addUser(@RequestBody UsersDto usersDto) {
+    public void addUser(@RequestBody @Valid UsersDto usersDto) {
         usersService.addUser(usersDto);
     }
 
     @PutMapping("/{userId}")
-    public void updateUser(@RequestBody UsersDto usersDto, @PathVariable Long userId) {
+    public void updateUser(@RequestBody @Valid UsersDto usersDto, @PathVariable Long userId) {
         usersService.updateUser(usersDto, userId);
     }
 

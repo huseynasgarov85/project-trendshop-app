@@ -19,5 +19,5 @@ public class TrousersEntity {
     private String marka;
     private Integer size;
     private Double price;
-    private Long count;
+    private Long counter;
 }

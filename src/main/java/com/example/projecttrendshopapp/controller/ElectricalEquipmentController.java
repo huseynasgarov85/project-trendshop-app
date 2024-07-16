@@ -4,6 +4,7 @@ import com.example.projecttrendshopapp.model.dto.ElectricalEquipmentsDto;
 import com.example.projecttrendshopapp.model.dto.ShirtDto;
 import com.example.projecttrendshopapp.service.ElectricalEquipmentService;
 import com.example.projecttrendshopapp.service.ShirtsService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +26,11 @@ public class ElectricalEquipmentController {
         return electricalEquipmentService.getById(electricalEquipmentId);
     }
     @PostMapping()
-    public void  addElectricalEquipment(@RequestBody ElectricalEquipmentsDto electricalEquipmentsDto){
+    public void  addElectricalEquipment(@RequestBody @Valid ElectricalEquipmentsDto electricalEquipmentsDto){
         electricalEquipmentService.addElectricalEquipment(electricalEquipmentsDto);
     }
     @PutMapping("/{electricalEquipmentId}")
-    public void updateELectricalEquipment(@RequestBody ElectricalEquipmentsDto electricalEquipmentsDto,@PathVariable Long electricalEquipmentId){
+    public void updateELectricalEquipment(@RequestBody @Valid ElectricalEquipmentsDto electricalEquipmentsDto,@PathVariable Long electricalEquipmentId){
         electricalEquipmentService.updateELectricalEquipment(electricalEquipmentsDto,electricalEquipmentId);
     }
     @DeleteMapping("/{electricalEquipmentId}")

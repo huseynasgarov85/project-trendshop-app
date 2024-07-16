@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDto {
-   private List<BasketDto> basketDtos;
+   private List<Object> baskets;
    private Long userId;
+   private Long id;
 }

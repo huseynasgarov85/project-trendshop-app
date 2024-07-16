@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShoesDto {
+public class ShoesDtoVol2 {
     private Long id;
     @NotNull
     private ProductCategoryShoes productCategoryShoes;

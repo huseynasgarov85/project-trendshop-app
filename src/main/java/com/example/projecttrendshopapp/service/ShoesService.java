@@ -27,10 +27,7 @@ public class ShoesService {
 
     public ShoesDto getById(Long shoeId) {
         log.info("ActionLog.getById.started:shoesId {}", shoeId);
-        var shoesEntity = shoesRepository.findById(shoeId).orElseThrow(() -> {
-            log.error("Action is failed shoesId:{}", shoeId);
-            return new NotFoundException("shoes id is not find");
-        });
+        var shoesEntity = shoesRepository.findById(shoeId).orElseThrow(() ->new NotFoundException("shoes id is not find"));
         var shoesDto = shoesMapper.mapToDto(shoesEntity);
         log.info("ActionLog.getById.end:shoesId {}", shoeId);
         return shoesDto;
@@ -45,10 +42,7 @@ public class ShoesService {
 
     public void updateShoe(ShoesDto shoesDto, Long shoeId) {
         log.info("ActionLog.updateShoe.started:shoeId {},shoesDto {}", shoeId, shoesDto);
-        var shoeEntity = shoesRepository.findById(shoeId).orElseThrow(() -> {
-            log.error("Action is failed shoesId:{}", shoeId);
-            return new NotFoundException("shoes id is not find");
-        });
+        var shoeEntity = shoesRepository.findById(shoeId).orElseThrow(() ->new NotFoundException("shoes id is not find"));
         shoesMapper.mapToEntity(shoeEntity, shoesDto);
         shoesRepository.save(shoeEntity);
         log.info("ActionLog.updateShoe.end:shoeId {},shoesDto {}", shoeId, shoesDto);

@@ -21,7 +21,7 @@ public class CardsEntity {
     private String cvv;
     private LocalDate expireDate;
     private Double cardBalance;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "users_id")
     @ToStringExclude
     private UsersEntity users;

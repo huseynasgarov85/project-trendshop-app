@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BasketDto {
+public class BasketWithProductsDto {
     private Long id;
     @NotNull
     private Status status;
@@ -20,6 +20,5 @@ public class BasketDto {
     private Products productName;
     @NotNull
     private UsersDto user;
-    @NotNull
-    private Long productId;
+    private Object product;
 }

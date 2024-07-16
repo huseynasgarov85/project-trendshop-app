@@ -26,6 +26,6 @@ public class UsersEntity {
     @Enumerated(EnumType.STRING)
     private GenderCategory genderCategory;
     private Double balance;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users", orphanRemoval = true,fetch = FetchType.EAGER)
     private List<CardsEntity> cards;
 }

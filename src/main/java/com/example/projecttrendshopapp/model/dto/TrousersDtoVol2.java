@@ -1,6 +1,6 @@
 package com.example.projecttrendshopapp.model.dto;
 
-import com.example.projecttrendshopapp.model.enums.ProductCategoryShoes;
+import com.example.projecttrendshopapp.model.enums.ProductCategoryTrousers;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -12,22 +12,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShoesDto {
+public class TrousersDtoVol2 {
     private Long id;
     @NotNull
-    private ProductCategoryShoes productCategoryShoes;
+    private ProductCategoryTrousers productCategoryTrousers;
     @NotBlank
     private String colour;
     @NotBlank
     private String marka;
     @NotNull
-    @Size(min = 33, max = 45)
+    @Size(min = 28, max = 46)
     private Integer size;
     @NotNull
     @PositiveOrZero
-    private Double balance;
-    @NotBlank
-    private String name;
+    private Double price;
     @NotNull
-    private Long count;
+    private Long counter;
 }

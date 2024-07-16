@@ -25,12 +25,7 @@ public class ShirtsService {
 
     public ShirtDto getById(Long shirtsId) {
         log.info("ActionLog.getById.started:shirtsId {}", shirtsId);
-        var shirtsEntity = shirtsRepository.findById(shirtsId).orElseThrow
-                (() -> {
-                            log.error("Action is failed shirtId:{}", shirtsId);
-                            return new NotFoundException("shirt not found");
-                        }
-                );
+        var shirtsEntity = shirtsRepository.findById(shirtsId).orElseThrow(() ->new NotFoundException("shirt not found"));
         var shirtsDto = shirtsMapper.mapToDto(shirtsEntity);
         log.info("ActionLog.getById.end:shirtsId {}", shirtsId);
         return shirtsDto;
@@ -46,11 +41,7 @@ public class ShirtsService {
 
     public void updateShirt(ShirtDto shirtDto, Long shirtId) {
         log.info("ActionLog.updateShirts.started:shirtId {},shirtDto {}", shirtId,shirtDto);
-        var shirtEntity = shirtsRepository.findById(shirtId).orElseThrow(() -> {
-                    log.error("Action is failed shirtId:{}", shirtId);
-                    return new NotFoundException("Shirt not found");
-                }
-        );
+        var shirtEntity = shirtsRepository.findById(shirtId).orElseThrow(() -> new NotFoundException("Shirt not found"));
         var updateShirt = shirtsMapper.mapToEntity(shirtEntity, shirtDto);
         shirtsRepository.save(updateShirt);
         log.info("ActionLog.updateShirts.end:shirtId {},shirtDto {}", shirtId,shirtDto);

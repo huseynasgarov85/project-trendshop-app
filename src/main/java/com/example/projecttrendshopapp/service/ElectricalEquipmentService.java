@@ -28,12 +28,7 @@ public class ElectricalEquipmentService {
 
     public ElectricalEquipmentsDto getById(Long electricalEquipmentId) {
         log.info("ActionLog.getById.started:electricalEquipmentId {}", electricalEquipmentId);
-        var electricalEquipmentsEntity = electricalEquipmentRepository.findById(electricalEquipmentId).orElseThrow
-                (() -> {
-                            log.error("Action is failed electricalEquipmentId:{}", electricalEquipmentId);
-                            return new NotFoundException("electricalEquipment not found");
-                        }
-                );
+        var electricalEquipmentsEntity = electricalEquipmentRepository.findById(electricalEquipmentId).orElseThrow(() -> new NotFoundException("electricalEquipment not found"));
         var electricalEquipmentsDto = elecrtricalEquipmentMapper.mapToDto(electricalEquipmentsEntity);
         log.info("ActionLog.getById.end:electricalEquipmentId {}", electricalEquipmentId);
         return electricalEquipmentsDto;
@@ -48,11 +43,7 @@ public class ElectricalEquipmentService {
 
     public void updateELectricalEquipment(ElectricalEquipmentsDto electricalEquipmentsDto, Long electricalEquipmentId) {
         log.info("ActionLog.updateShirts.started:electricalEquipmentId {}", electricalEquipmentId);
-        var electricalEquipmentsEntity = electricalEquipmentRepository.findById(electricalEquipmentId).orElseThrow(() -> {
-                    log.error("Action is failed electricalEquipmentId:{}", electricalEquipmentId);
-                    return new NotFoundException("ElectricalEquipment not found");
-                }
-        );
+        var electricalEquipmentsEntity = electricalEquipmentRepository.findById(electricalEquipmentId).orElseThrow(() ->new NotFoundException("ElectricalEquipment not found"));
         var updateElectricalEquipment = elecrtricalEquipmentMapper.mapToEntity(electricalEquipmentsEntity, electricalEquipmentsDto);
         electricalEquipmentRepository.save(updateElectricalEquipment);
         log.info("ActionLog.updateShirts.end:electricalEquipmentId {}", electricalEquipmentId);
