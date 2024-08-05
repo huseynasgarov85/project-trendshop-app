@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ExceptionDto {
-    private String message;
+@NoArgsConstructor
+public class JwtResponse {
+    private String token;
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
 
-    @GetMapping("")
+    @GetMapping
     public List<OrderDto> getAllInformation(){
         return orderService.getAllInformation();
     }
@@ -21,7 +21,7 @@ public class OrderController {
     public OrderDto getById(@PathVariable Long orderId){
         return orderService.getById(orderId);
     }
-    @PostMapping("/{userId}/order/{orderId}")
+    @PatchMapping("/{userId}/{orderId}")
     public void createOrders(@PathVariable Long userId,@PathVariable Long orderId){
         orderService.createOrder(userId,orderId);
     }

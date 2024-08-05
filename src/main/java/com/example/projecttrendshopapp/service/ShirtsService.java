@@ -1,4 +1,5 @@
 package com.example.projecttrendshopapp.service;
+
 import com.example.projecttrendshopapp.dao.repository.ShirtsRepository;
 import com.example.projecttrendshopapp.exception.NotFoundException;
 import com.example.projecttrendshopapp.mapper.ShirtsMapper;
@@ -6,7 +7,9 @@ import com.example.projecttrendshopapp.model.dto.ShirtDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -25,7 +28,7 @@ public class ShirtsService {
 
     public ShirtDto getById(Long shirtsId) {
         log.info("ActionLog.getById.started:shirtsId {}", shirtsId);
-        var shirtsEntity = shirtsRepository.findById(shirtsId).orElseThrow(() ->new NotFoundException("shirt not found"));
+        var shirtsEntity = shirtsRepository.findById(shirtsId).orElseThrow(() -> new NotFoundException("shirt not found"));
         var shirtsDto = shirtsMapper.mapToDto(shirtsEntity);
         log.info("ActionLog.getById.end:shirtsId {}", shirtsId);
         return shirtsDto;
@@ -40,11 +43,11 @@ public class ShirtsService {
     }
 
     public void updateShirt(ShirtDto shirtDto, Long shirtId) {
-        log.info("ActionLog.updateShirts.started:shirtId {},shirtDto {}", shirtId,shirtDto);
+        log.info("ActionLog.updateShirts.started:shirtId {},shirtDto {}", shirtId, shirtDto);
         var shirtEntity = shirtsRepository.findById(shirtId).orElseThrow(() -> new NotFoundException("Shirt not found"));
         var updateShirt = shirtsMapper.mapToEntity(shirtEntity, shirtDto);
         shirtsRepository.save(updateShirt);
-        log.info("ActionLog.updateShirts.end:shirtId {},shirtDto {}", shirtId,shirtDto);
+        log.info("ActionLog.updateShirts.end:shirtId {},shirtDto {}", shirtId, shirtDto);
     }
 
     public void removeShirt(Long shirtId) {

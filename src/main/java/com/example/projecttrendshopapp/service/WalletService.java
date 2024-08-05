@@ -54,6 +54,9 @@ public class WalletService {
         var amount = generalPayment(filteredBasketEntities);
         var cardEntity = cardsRepository.findById(cardId).orElseThrow(() -> new NotFoundException("cardId not found"));
         if (amount < cardEntity.getCardBalance()) {
+            OrderEntity order = orderRepository.findById(orderId).orElseThrow();
+            order.setProductsPrice(amount);
+            orderRepository.save(order);
             cardEntity.setCardBalance(cardEntity.getCardBalance() - amount);
         }
     }
@@ -64,6 +67,9 @@ public class WalletService {
         var orderEntity = orderRepository.findById(orderId).orElseThrow(() -> new NotFoundException("orderId not found"));
         var amount = generalPayment(filteredBasketEntities);
         if (amount < orderEntity.getUsers().getBalance()) {
+            OrderEntity order = orderRepository.findById(orderId).orElseThrow();
+            order.setProductsPrice(amount);
+            orderRepository.save(order);
             orderEntity.getUsers().setBalance(orderEntity.getUsers().getBalance() - amount);
         }
     }

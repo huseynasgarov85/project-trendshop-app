@@ -22,4 +22,6 @@ public class ElectricalEquipmentsDto {
     private Double price;
     @NotNull
     private Long counter;
+    @NotNull
+    private Long quantity;
 }

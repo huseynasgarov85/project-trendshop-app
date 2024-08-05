@@ -5,6 +5,8 @@ import com.example.projecttrendshopapp.model.dto.UsersDto;
 import com.example.projecttrendshopapp.service.UsersService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
 public class UsersController {
     private final UsersService usersService;
 
-    @GetMapping()
+    @GetMapping
     public List<UsersDto> getAllUsers() {
         return usersService.getAllUsers();
     }
@@ -25,9 +27,11 @@ public class UsersController {
         return usersService.getById(userId);
     }
 
-    @PostMapping()
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void addUser(@RequestBody @Valid UsersDto usersDto) {
         usersService.addUser(usersDto);
+//        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{userId}")

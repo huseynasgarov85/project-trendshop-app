@@ -1,11 +1,8 @@
 package com.example.projecttrendshopapp.controller;
 
-import com.example.projecttrendshopapp.dao.repository.OrderRepository;
 import com.example.projecttrendshopapp.model.enums.PaymentMethod;
-import com.example.projecttrendshopapp.service.OrderService;
 import com.example.projecttrendshopapp.service.WalletService;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

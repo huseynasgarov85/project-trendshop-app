@@ -1,8 +1,8 @@
 package com.example.projecttrendshopapp.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.commons.lang3.builder.ToStringExclude;
 
 import java.time.LocalDate;
 
@@ -23,6 +23,6 @@ public class CardsEntity {
     private Double cardBalance;
     @ManyToOne
     @JoinColumn(name = "users_id")
-    @ToStringExclude
+    @JsonBackReference
     private UsersEntity users;
 }

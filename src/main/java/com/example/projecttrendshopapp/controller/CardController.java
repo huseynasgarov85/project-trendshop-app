@@ -14,7 +14,7 @@ import java.util.List;
 public class CardController {
     private final CardService cardService;
 
-    @GetMapping()
+    @GetMapping
     public List<CardsDto> getAll(){
         return cardService.getAll();
     }
@@ -22,7 +22,7 @@ public class CardController {
     public CardsDto getById(@PathVariable Long cardId){
         return cardService.getById(cardId);
     }
-    @PostMapping()
+    @PostMapping
     public void addCards(@RequestBody @Valid CardsDto cardsDto){
         cardService.addCard(cardsDto);
     }

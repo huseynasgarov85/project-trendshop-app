@@ -1,33 +1,24 @@
 package com.example.projecttrendshopapp.dao.entity;
 
 import com.example.projecttrendshopapp.model.enums.Products;
-import com.example.projecttrendshopapp.model.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-
 @Entity
-@Table(name = "basket")
+@Table(name = "favorites")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class BasketEntity {
+public class FavoritesProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Enumerated(EnumType.STRING)
-    private Products productName;
-    @Enumerated(EnumType.STRING)
-    private Status status;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UsersEntity user;
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private OrderEntity order;
+    @Enumerated(EnumType.STRING)
+    private Products productName;
     private Long productId;
-    private LocalDate placingOfTheGoodsTime;
 }

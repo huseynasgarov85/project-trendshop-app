@@ -1,9 +1,7 @@
 package com.example.projecttrendshopapp.controller;
 
 import com.example.projecttrendshopapp.model.dto.ElectricalEquipmentsDto;
-import com.example.projecttrendshopapp.model.dto.ShirtDto;
 import com.example.projecttrendshopapp.service.ElectricalEquipmentService;
-import com.example.projecttrendshopapp.service.ShirtsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,17 +23,16 @@ public class ElectricalEquipmentController {
     public ElectricalEquipmentsDto getById(@PathVariable Long electricalEquipmentId){
         return electricalEquipmentService.getById(electricalEquipmentId);
     }
-    @PostMapping()
+    @PostMapping
     public void  addElectricalEquipment(@RequestBody @Valid ElectricalEquipmentsDto electricalEquipmentsDto){
         electricalEquipmentService.addElectricalEquipment(electricalEquipmentsDto);
     }
     @PutMapping("/{electricalEquipmentId}")
-    public void updateELectricalEquipment(@RequestBody @Valid ElectricalEquipmentsDto electricalEquipmentsDto,@PathVariable Long electricalEquipmentId){
+    public void updateElectricalEquipment(@RequestBody @Valid ElectricalEquipmentsDto electricalEquipmentsDto, @PathVariable Long electricalEquipmentId){
         electricalEquipmentService.updateELectricalEquipment(electricalEquipmentsDto,electricalEquipmentId);
     }
     @DeleteMapping("/{electricalEquipmentId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeElectricalEqipment(@PathVariable Long electricalEquipmentId){
+    public void removeElectricalEquipment(@PathVariable Long electricalEquipmentId){
         electricalEquipmentService.removeElectricalEqipment(electricalEquipmentId);
     }
 }

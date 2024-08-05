@@ -4,6 +4,7 @@ import com.example.projecttrendshopapp.model.enums.GenderCategory;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -28,4 +29,7 @@ public class UsersEntity {
     private Double balance;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users", orphanRemoval = true,fetch = FetchType.EAGER)
     private List<CardsEntity> cards;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.EAGER)
+    private List<RoleEntity> roles;
+    private LocalDate dateOfCreation;
 }

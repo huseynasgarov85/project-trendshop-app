@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @Slf4j
-public class ErrorHandler {
+public class GlobalErrorHandler {
 
     @ExceptionHandler(InvalidBalanceException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

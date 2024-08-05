@@ -1,4 +1,5 @@
 package com.example.projecttrendshopapp.model.dto;
+
 import com.example.projecttrendshopapp.model.enums.ProductCategoryShirt;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

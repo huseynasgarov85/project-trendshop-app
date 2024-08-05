@@ -15,7 +15,7 @@ import java.util.List;
 public class ShoesController {
     private final ShoesService shoesService;
 
-    @GetMapping()
+    @GetMapping
     public List<ShoesDto> getAll() {
         return shoesService.getAll();
     }
@@ -25,7 +25,7 @@ public class ShoesController {
         return shoesService.getById(shoeId);
     }
 
-    @PostMapping()
+    @PostMapping
     public void addShoe(@RequestBody @Valid ShoesDto shoesDto){
         shoesService.addShoe(shoesDto);
     }

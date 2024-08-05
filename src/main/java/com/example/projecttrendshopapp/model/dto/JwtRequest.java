@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExceptionDto {
-    private String message;
+public class JwtRequest {
+    private String username;
+    private String password;
 }

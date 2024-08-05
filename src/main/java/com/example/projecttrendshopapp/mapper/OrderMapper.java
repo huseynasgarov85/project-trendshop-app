@@ -2,28 +2,21 @@ package com.example.projecttrendshopapp.mapper;
 
 import com.example.projecttrendshopapp.dao.entity.BasketEntity;
 import com.example.projecttrendshopapp.dao.entity.OrderEntity;
-import com.example.projecttrendshopapp.model.dto.BasketDto;
 import com.example.projecttrendshopapp.model.dto.OrderDto;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface OrderMapper {
     @Mapping(source = "users.id", target = "userId")
-  //  @Mapping(source = "baskets", target = "basketList", qualifiedByName = "mapToBasketList")
+//    @Mapping(source = "baskets.id",target = "basketId")
     OrderDto mapToDto(OrderEntity orderEntity);
 
-//    OrderEntity mapToEntity(OrderDto orderDto);
-
-//    @Mapping(ignore = true, target = "id")
-//    OrderEntity mapToEntity(@MappingTarget OrderEntity orderEntity, OrderDto orderDto);
-
-//    @Named(value = "mapToBasketList")
-//    default List<Object> mapToBasketList(List<BasketEntity> basketEntityList){
-//        return new ArrayList<>(basketEntityList);
-//    }
-
-
+    default List<Long> map(List<BasketEntity> baskets) {
+        return baskets.stream().map(BasketEntity::getId).collect(Collectors.toList());
+    }
 }

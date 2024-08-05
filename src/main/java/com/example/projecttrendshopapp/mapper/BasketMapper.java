@@ -17,8 +17,8 @@ public interface BasketMapper {
     BasketEntity mapToEntity(BasketDto basketDto);
 
     BasketEntity mapToEntity(@MappingTarget BasketEntity basketEntity, BasketDto basketDto);
-    ShoesDtoVol2 mapShoesEntityToDto(ShoesEntity shoesEntity);
-    TrousersDtoVol2 mapTrousersEntityToDto(TrousersEntity trousersEntity);
-    ElectricalEquipmentsDtoVol2 mapElectricalEntityToDto(ElectricalEquipmentsEntity electricalEquipmentsEntity);
-    ShirtDtoVol2 mapShirtEntityToDto(ShirtEntity shirtEntity);
+    ShoesDtoVol2 mapShoesEntityToDto(ShoesEntity shoesEntity,Long basketId);
+    TrousersDtoVol2 mapTrousersEntityToDto(TrousersEntity trousersEntity,Long basketId);
+    ElectricalEquipmentsDtoVol2 mapElectricalEntityToDto(ElectricalEquipmentsEntity electricalEquipmentsEntity,Long basketId);
+    ShirtDtoVol2 mapShirtEntityToDto(ShirtEntity shirtEntity,Long basketId);
 }

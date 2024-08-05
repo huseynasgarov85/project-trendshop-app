@@ -23,7 +23,7 @@ public class ShirtsController {
     public ShirtDto getById(@PathVariable Long shirtId){
         return shirtsService.getById(shirtId);
     }
-    @PostMapping()
+    @PostMapping
     public void addShirt(@RequestBody @Valid ShirtDto shirtDto){
         shirtsService.addShirt(shirtDto);
     }

@@ -13,7 +13,7 @@ import java.util.List;
 public class TrousersController {
     private final TrousersService trousersService;
 
-    @GetMapping()
+    @GetMapping
     public List<TrousersDto> getAll(){
         return trousersService.getAll();
     }
@@ -21,7 +21,7 @@ public class TrousersController {
     public TrousersDto getById(@PathVariable Long trouserId){
        return trousersService.getById(trouserId);
     }
-    @PostMapping()
+    @PostMapping
     public void addTrouser(@RequestBody @Valid TrousersDto trousersDto){
         trousersService.addTrouser(trousersDto);
     }

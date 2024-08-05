@@ -1,6 +1,5 @@
 package com.example.projecttrendshopapp.mapper;
 
-import ch.qos.logback.core.model.INamedModel;
 import com.example.projecttrendshopapp.dao.entity.CardsEntity;
 import com.example.projecttrendshopapp.model.dto.CardsDto;
 import org.mapstruct.Mapper;

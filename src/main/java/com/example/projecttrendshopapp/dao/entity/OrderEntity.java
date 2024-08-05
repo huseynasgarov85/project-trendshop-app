@@ -1,8 +1,10 @@
 package com.example.projecttrendshopapp.dao.entity;
 
+import com.example.projecttrendshopapp.model.enums.ProductsRating;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -22,4 +24,9 @@ public class OrderEntity {
     private UsersEntity users;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<BasketEntity> baskets;
+    @Enumerated(EnumType.STRING)
+    private ProductsRating productsRating;
+    private Boolean freeDelivery;
+    private Double productsPrice;
+    private LocalDate createdAt;
 }
