@@ -15,7 +15,7 @@ public class ElectricalEquipmentsEntity {
     private Long id;
     @Enumerated(EnumType.STRING)
     private ProductCategoryElectricalEquipments productCategoryElectricalEquipments;
-    private String marka;
+    private String marca;
     private String name;
     private Long count;
     private Double price;

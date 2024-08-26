@@ -2,22 +2,25 @@ package com.example.projecttrendshopapp.controller;
 
 import com.example.projecttrendshopapp.model.dto.BasketDto;
 import com.example.projecttrendshopapp.model.dto.BasketWithProductsDto;
-import com.example.projecttrendshopapp.service.BasketService;
+import com.example.projecttrendshopapp.service.services.BasketService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 @RestController
-@RequestMapping("basket")
+@RequestMapping("/basket")
 @RequiredArgsConstructor
 public class BasketController {
     private final BasketService basketService;
 
     @GetMapping
-    public List<BasketDto> getAllBaskets(){
-        return basketService.getAllBaskets();
+    public Page<BasketDto> getAll(@PageableDefault(size = 2) Pageable pageable){
+        return basketService.getAll(pageable);
     }
 
     @GetMapping("/{basketId}")
@@ -26,18 +29,18 @@ public class BasketController {
     }
 
     @PostMapping
-    public void addBasket(@RequestBody @Valid BasketDto basketDto){
-        basketService.addBasket(basketDto);
+    public void add(@RequestBody @Valid BasketDto basketDto){
+        basketService.add(basketDto);
     }
 
-    @PatchMapping("/{basketId}/user/{userId}")
-    public void updateBasket(@PathVariable Long basketId,@PathVariable Long userId,@RequestBody @Valid BasketDto basketDto){
-        basketService.updateBasket(basketId,userId,basketDto);
+    @PatchMapping("/{basketId}/{userId}")
+    public void update(@PathVariable Long basketId,@PathVariable Long userId,@RequestBody @Valid BasketDto basketDto){
+        basketService.update(basketId,userId,basketDto);
     }
 
     @DeleteMapping("/{basketId}")
-    public void removeBasket(@PathVariable Long basketId){
-        basketService.removeBasket(basketId);
+    public void remove(@PathVariable Long basketId){
+        basketService.remove(basketId);
     }
 
 }

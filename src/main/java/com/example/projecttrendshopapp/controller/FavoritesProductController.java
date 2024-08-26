@@ -1,7 +1,7 @@
 package com.example.projecttrendshopapp.controller;
 
 import com.example.projecttrendshopapp.model.dto.FavoritesProductDto;
-import com.example.projecttrendshopapp.service.FavoritesProductService;
+import com.example.projecttrendshopapp.service.services.FavoritesProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("favorites")
+@RequestMapping("/favorites")
 @RequiredArgsConstructor
 public class FavoritesProductController {
     private final FavoritesProductService favoritesProductService;
@@ -25,13 +25,13 @@ public class FavoritesProductController {
     }
 
     @PostMapping
-    public void createFavoritesProduct(@RequestBody @Valid FavoritesProductDto favoritesProductDto) {
-        favoritesProductService.createFavoritesProduct(favoritesProductDto);
+    public void create(@RequestBody @Valid FavoritesProductDto favoritesProductDto) {
+        favoritesProductService.create(favoritesProductDto);
     }
 
     @DeleteMapping("/{favoritesProductId}")
-    public void removeFavoritesProduct(@PathVariable Long favoritesProductId) {
-        favoritesProductService.removeFavoritesProduct(favoritesProductId);
+    public void remove(@PathVariable Long favoritesProductId) {
+        favoritesProductService.remove(favoritesProductId);
     }
 
 }

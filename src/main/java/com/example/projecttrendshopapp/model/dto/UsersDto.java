@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -15,6 +16,10 @@ public class UsersDto {
     private Long id;
     @NotBlank
     private String name;
+    @Size(min = 2, max = 50)
+    @Pattern(regexp = "[A-Za-z0-9_.]+$")
+    @NotBlank
+    private String username;
     @NotBlank
     private String surname;
     @NotBlank
@@ -33,4 +38,5 @@ public class UsersDto {
     @PositiveOrZero
     private Double balance;
     private List<CardsDto> cards;
+    private LocalDate dateOfCreation;
 }

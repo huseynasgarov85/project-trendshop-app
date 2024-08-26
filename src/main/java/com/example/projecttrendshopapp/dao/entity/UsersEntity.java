@@ -1,6 +1,7 @@
 package com.example.projecttrendshopapp.dao.entity;
 
 import com.example.projecttrendshopapp.model.enums.GenderCategory;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class UsersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String username;
     private String name;
     private String surname;
     private String email;
@@ -28,8 +30,11 @@ public class UsersEntity {
     private GenderCategory genderCategory;
     private Double balance;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users", orphanRemoval = true,fetch = FetchType.EAGER)
+    @ToString.Exclude
     private List<CardsEntity> cards;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.EAGER)
+    @JsonBackReference
+    @ToString.Exclude
     private List<RoleEntity> roles;
     private LocalDate dateOfCreation;
 }

@@ -8,7 +8,7 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-public interface ElecrtricalEquipmentMapper {
+public interface ElectricalEquipmentMapper {
     ElectricalEquipmentsDto mapToDto(ElectricalEquipmentsEntity electricalEquipmentsEntity);
 
     ElectricalEquipmentsEntity mapToEntity(ElectricalEquipmentsDto electricalEquipmentsDto);

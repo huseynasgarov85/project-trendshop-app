@@ -19,7 +19,7 @@ public class TrousersDto {
     @NotBlank
     private String colour;
     @NotBlank
-    private String marka;
+    private String marca;
     @NotNull
     @Size(min = 28, max = 46)
     private Integer size;

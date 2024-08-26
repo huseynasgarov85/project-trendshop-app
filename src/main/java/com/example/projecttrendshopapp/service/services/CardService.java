@@ -1,4 +1,4 @@
-package com.example.projecttrendshopapp.service;
+package com.example.projecttrendshopapp.service.services;
 
 import com.example.projecttrendshopapp.dao.repository.CardsRepository;
 import com.example.projecttrendshopapp.dao.repository.UsersRepository;
@@ -20,10 +20,10 @@ public class CardService {
     private final UsersRepository usersRepository;
 
     public List<CardsDto> getAll() {
-        log.info("ActionLog.getAllUsers.started");
+        log.info("ActionLog.getAll.started");
         var cardsEntity = cardsRepository.findAll();
         var cardsDto = cardsEntity.stream().map(cardMapper::mapToDto).toList();
-        log.info("ActionLog.getAllUsers.started");
+        log.info("ActionLog.getAll.started");
         return cardsDto;
     }
 
@@ -35,25 +35,25 @@ public class CardService {
         return cardDto;
     }
 
-    public void addCard(CardsDto cardsDto) {
-        log.info("ActionLog.addCard.started:cardsDto {}", cardsDto);
+    public void add(CardsDto cardsDto) {
+        log.info("ActionLog.add.started:cardsDto {}", cardsDto);
         var cardsEntity = cardMapper.mapToEntity(cardsDto);
         cardsRepository.save(cardsEntity);
-        log.info("ActionLog.addCard.end:cardsDto {}", cardsDto);
+        log.info("ActionLog.add.end:cardsDto {}", cardsDto);
     }
 
-    public void updateCard(CardsDto cardsDto, Long cardId) {
-        log.info("ActionLog.updateCard.started:cardId {},cardsDto {}", cardId, cardsDto);
+    public void update(CardsDto cardsDto, Long cardId) {
+        log.info("ActionLog.update.started:cardId {},cardsDto {}", cardId, cardsDto);
         var cardEntity = cardsRepository.findById(cardId).orElseThrow(() ->new NotFoundException("cardId not found"));
         cardMapper.mapToEntity(cardEntity, cardsDto);
         cardsRepository.save(cardEntity);
-        log.info("ActionLog.updateCard.end:cardId {},cardsDto {}", cardId, cardsDto);
+        log.info("ActionLog.update.end:cardId {},cardsDto {}", cardId, cardsDto);
     }
 
-    public void removeCard(Long cardId) {
-        log.info("ActionLog.removeCard.started:cardId {}", cardId);
+    public void remove(Long cardId) {
+        log.info("ActionLog.remove.started:cardId {}", cardId);
         cardsRepository.deleteById(cardId);
-        log.info("ActionLog.removeCard.started:cardId {}", cardId);
+        log.info("ActionLog.remove.started:cardId {}", cardId);
     }
 
     public void addCardsToUser(Long userId, CardsDto cardsDto) {

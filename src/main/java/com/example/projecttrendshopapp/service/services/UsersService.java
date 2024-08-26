@@ -1,5 +1,6 @@
-package com.example.projecttrendshopapp.service;
+package com.example.projecttrendshopapp.service.services;
 
+import com.example.projecttrendshopapp.dao.entity.CardsEntity;
 import com.example.projecttrendshopapp.dao.entity.RoleEntity;
 import com.example.projecttrendshopapp.dao.repository.CardsRepository;
 import com.example.projecttrendshopapp.dao.repository.UsersRepository;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,11 +30,11 @@ public class UsersService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public List<UsersDto> getAllUsers() {
-        log.info("ActionLog.getAllUsers.started");
+    public List<UsersDto> getAll() {
+        log.info("ActionLog.getAll.started");
         var usersEntity = usersRepository.findAll();
         var usersDto = usersEntity.stream().map(usersMapper::mapToDto).toList();
-        log.info("ActionLog.getAllUsers.started");
+        log.info("ActionLog.getAll.started");
         return usersDto;
     }
 
@@ -44,36 +46,36 @@ public class UsersService {
         return userDto;
     }
 
-    public void addUser(UsersDto userDto) {
+    public void add(UsersDto userDto) {
         validationUtil.checkUserEmail(userDto);
-        log.info("ActionLog.addUser.started:userDto {}", userDto);
+        log.info("ActionLog.add.started:userDto {}", userDto);
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         var userEntity = usersMapper.mapToEntity(userDto);
         userEntity.setDateOfCreation(LocalDate.now());
         var role = new RoleEntity(null, "ROLE_USER", userEntity);
         userEntity.setRoles(List.of(role));
         usersRepository.save(userEntity);
-        log.info("ActionLog.addUser.end:userDto {}", userDto);
+        log.info("ActionLog.add.end:userDto {}", userDto);
     }
 
-    public void updateUser(UsersDto usersDto, Long userId) {
-        log.info("ActionLog.updateUser.started: usersDto {},userId {}", usersDto, userId);
+    public void update(UsersDto usersDto, Long userId) {
+        log.info("ActionLog.update.started: usersDto {},userId {}", usersDto, userId);
         var userEntity = usersRepository.findById(userId).orElseThrow(() -> new NotFoundException("userId not found"));
         var updateUser = usersMapper.mapToEntity(userEntity, usersDto);
         usersRepository.save(updateUser);
-        log.info("ActionLog.updateUser.started: usersDto {},userId {}", usersDto, userId);
+        log.info("ActionLog.update.started: usersDto {},userId {}", usersDto, userId);
     }
 
-    public void deleteUser(Long userId) {
-        log.info("ActionLog.deleteUser.started:userId {}", userId);
+    public void delete(Long userId) {
+        log.info("ActionLog.delete.started:userId {}", userId);
         usersRepository.deleteById(userId);
-        log.info("ActionLog.deleteUser.started:userId {}", userId);
+        log.info("ActionLog.delete.started:userId {}", userId);
     }
 
     public void removeCardFromUser(Long userId, Long cardId) {
         log.info("ActionLog.removeCardFromUser.started:userId {},cardId {}", userId, cardId);
         var userEntity = usersRepository.findById(userId).orElseThrow(() -> new NotFoundException("userId not found"));
-        var cards = userEntity.getCards();
+        List<CardsEntity> cards = userEntity.getCards();
         cards.removeIf(m -> m.getId().equals(cardId));
         userEntity.setCards(cards);
         usersRepository.save(userEntity);
@@ -91,6 +93,7 @@ public class UsersService {
         log.info("ActionLog.addCardToUser.end:userId {},cardId {}", userId, cardId);
     }
 
+    @Transactional
     public void sendToUserBalance(Long userId, SendToUserBalanceDto sendToUserBalanceDto) {
         log.info("ActionLog.sendToBalance.started:userId {},sendToUserBalanceDto {}", userId, sendToUserBalanceDto);
         var userEntity = usersRepository.findById(userId).orElseThrow(() -> new NotFoundException("userId not found"));
@@ -100,6 +103,7 @@ public class UsersService {
         }
         card.setCardBalance(card.getCardBalance() - sendToUserBalanceDto.getBalance());
         userEntity.setBalance(sendToUserBalanceDto.getBalance() + userEntity.getBalance());
+        cardsRepository.save(card);
         usersRepository.save(userEntity);
         log.info("ActionLog.sendToBalance.end:userId {},sendToUserBalanceDto {}", userId, sendToUserBalanceDto);
     }

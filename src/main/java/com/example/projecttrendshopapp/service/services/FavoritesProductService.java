@@ -1,4 +1,4 @@
-package com.example.projecttrendshopapp.service;
+package com.example.projecttrendshopapp.service.services;
 
 import com.example.projecttrendshopapp.dao.entity.FavoritesProductEntity;
 import com.example.projecttrendshopapp.dao.repository.*;
@@ -80,17 +80,17 @@ public class FavoritesProductService {
         return favoritesProductDto;
     }
 
-    public void createFavoritesProduct(FavoritesProductDto favoritesProductDto) {
-        log.info("ActionLog.createFavoritesProduct.started:favoritesProductDto {}", favoritesProductDto);
+    public void create(FavoritesProductDto favoritesProductDto) {
+        log.info("ActionLog.create.started:favoritesProductDto {}", favoritesProductDto);
         FavoritesProductEntity favoritesProductEntity = favoritesProductsMapper.mapToEntity(favoritesProductDto);
         favoritesProductsRepository.save(favoritesProductEntity);
-        log.info("ActionLog.createFavoritesProduct.end:favoritesProductDto {}", favoritesProductDto);
+        log.info("ActionLog.create.end:favoritesProductDto {}", favoritesProductDto);
     }
 
 
-    public void removeFavoritesProduct(Long favoritesProductId) {
-        log.info("ActionLog.removeFavoritesProduct.started: favoritesProductId {}", favoritesProductId);
+    public void remove(Long favoritesProductId) {
+        log.info("ActionLog.remove.started: favoritesProductId {}", favoritesProductId);
         favoritesProductsRepository.deleteById(favoritesProductId);
-        log.info("ActionLog.removeFavoritesProduct.end: favoritesProductId {}", favoritesProductId);
+        log.info("ActionLog.remove.end: favoritesProductId {}", favoritesProductId);
     }
 }

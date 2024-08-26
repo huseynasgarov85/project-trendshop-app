@@ -15,11 +15,8 @@ import com.example.projecttrendshopapp.dao.repository.TrousersRepository
 import com.example.projecttrendshopapp.dao.repository.UsersRepository
 import com.example.projecttrendshopapp.mapper.BasketMapper
 import com.example.projecttrendshopapp.mapper.OrderMapper
-import com.example.projecttrendshopapp.model.dto.ElectricalEquipmentsDtoVol2
 import com.example.projecttrendshopapp.model.dto.OrderDto
-import com.example.projecttrendshopapp.model.dto.ShirtDtoVol2
-import com.example.projecttrendshopapp.model.dto.ShoesDtoVol2
-import com.example.projecttrendshopapp.model.dto.TrousersDtoVol2
+import com.example.projecttrendshopapp.service.services.OrderService
 import com.example.projecttrendshopapp.util.ValidationUtil
 import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
@@ -54,7 +51,7 @@ class OrderServiceTest extends Specification {
 
     }
 
-    def "getAllInformation"() {
+    def getAll() {
         given:
         def orderEntity1 = random.nextObject(OrderEntity)
         def orderEntity2 = random.nextObject(OrderEntity)
@@ -74,7 +71,7 @@ class OrderServiceTest extends Specification {
         def basketEntity = random.nextObject(BasketEntity)
 
         when:
-        def result = orderService.getAllInformation()
+        def result = orderService.getAll()
 
         then:
         1 * orderRepository.findAll() >> orderEntityList
@@ -89,16 +86,38 @@ class OrderServiceTest extends Specification {
 
         result == orderDtoList
     }
-//    def "CreateOrder"() {
-//
-//    }
-//
+
+    def Create() {
+
+    }
+
 //    def "GetById"() {
+//        given:
+//        Long orderId = 1L
+//        def order = new OrderEntity()
+//        def basketEntity1 = new BasketEntity(productName: Products.SHIRT, productId: 1L, status: Status.SELECTED, id: 101L)
+//        def basketEntity2 = new BasketEntity(productName: Products.TROUSERS, productId: 2L, status: Status.SELECTED, id: 102L)
+//        def basketEntity3 = new BasketEntity(productName: Products.SHOES, productId: 3L, status: Status.SELECTED, id: 103L)
+//        def basketEntity4 = new BasketEntity(productName: Products.ELECTRICAL_EQUIPMENTS, productId: 4L, status: Status.SELECTED, id: 104L)
+//        order.baskets = [basketEntity1, basketEntity2, basketEntity3, basketEntity4]
+//        def shirtEntity = random.nextObject(ShirtEntity)
+//        def trousersEntity = random.nextObject(TrousersEntity)
+//        def shoesEntity = random.nextObject(ShoesEntity)
+//        def electricalEquipmentEntity = random.nextObject(ElectricalEquipmentEntity)
+//        def shirtDto = random.nextObject(ShirtDto)
+//        when:
+//        then:
+//
 //
 //    }
-//
-//    def "RemoveOrder"() {
-//
-//    }
+
+    def Remove() {
+        given:
+        Long orderId = 1L
+        when:
+        orderService.remove(orderId)
+        then:
+        1 * orderRepository.deleteById(orderId)
+    }
 }
 

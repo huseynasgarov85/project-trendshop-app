@@ -1,4 +1,4 @@
-package com.example.projecttrendshopapp.service;
+package com.example.projecttrendshopapp.service.services;
 
 import com.example.projecttrendshopapp.dao.entity.BasketEntity;
 import com.example.projecttrendshopapp.dao.entity.OrderEntity;
@@ -11,8 +11,6 @@ import com.example.projecttrendshopapp.model.dto.OrderDto;
 import com.example.projecttrendshopapp.model.enums.Products;
 import com.example.projecttrendshopapp.model.enums.Status;
 import com.example.projecttrendshopapp.util.ValidationUtil;
-import io.github.benas.randombeans.EnhancedRandomBuilder;
-import io.github.benas.randombeans.api.EnhancedRandom;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -37,17 +35,17 @@ public class OrderService {
     private final UsersRepository usersRepository;
 
     @Transactional
-    public List<OrderDto> getAllInformation() {
-        log.info("ActionLog.getAllInformation.started.");
+    public List<OrderDto> getAll() {
+        log.info("ActionLog.getAll.started.");
         var orderEntities = orderRepository.findAll();
         var orderDtoList = orderEntities.stream().map(this::getOrderDto).toList();
-        log.info("ActionLog.getAllInformation.end.");
+        log.info("ActionLog.getAll.end.");
         return orderDtoList;
     }
 
-    public void createOrder(Long userId, Long orderId) {
+    public void create(Long userId, Long orderId) {
         validationUtil.checkStockSize(orderId);
-        log.info("ActionLog.createOrder.started: userId {}", userId);
+        log.info("ActionLog.create.started: userId {}", userId);
         var baskets = basketRepository.findByStatusAndUserId(Status.SELECTED, userId);
         generalStock(baskets);
         var orderEntity = OrderEntity.builder()
@@ -57,7 +55,7 @@ public class OrderService {
                 .build();
         baskets.forEach(it -> it.setOrder(orderEntity));
         orderRepository.save(orderEntity);
-        log.info("ActionLog.createOrder.end: userId {}", userId);
+        log.info("ActionLog.create.end: userId {}", userId);
     }
 
     @Transactional
@@ -94,10 +92,10 @@ public class OrderService {
         return orderDto;
     }
 
-    public void removeOrder(Long orderId) {
-        log.info("ActionLig.removeOrder.started:orderId {}", orderId);
+    public void remove(Long orderId) {
+        log.info("ActionLig.remove.started:orderId {}", orderId);
         orderRepository.deleteById(orderId);
-        log.info("ActionLig.removeOrder.started:orderId {}", orderId);
+        log.info("ActionLig.remove.started:orderId {}", orderId);
     }
 
     public void generalStock(List<BasketEntity> baskets) {
@@ -119,7 +117,7 @@ public class OrderService {
     }
 
     public List<UsersEntity> generateCashBack() {
-        log.info("ActionLog.getAll.started.");
+        log.info("ActionLog.generateCashBack.started.");
         List<OrderEntity> orders = orderRepository.findOrderEntitiesByCreatedAtAfter(LocalDate.now().minusMonths(1));
         Double counter = 0.0;
         Set<Long> userIds = new HashSet<>();
@@ -144,7 +142,7 @@ public class OrderService {
 
             }
         }
-        log.info("ActionLog.getAll.end");
+        log.info("ActionLog.generateCashBack.end");
         return usersEntityList;
     }
 

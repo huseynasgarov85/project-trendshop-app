@@ -3,6 +3,7 @@ package com.example.projecttrendshopapp.dao.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.commons.lang3.builder.ToStringExclude;
 
 import java.time.LocalDate;
 
@@ -24,5 +25,6 @@ public class CardsEntity {
     @ManyToOne
     @JoinColumn(name = "users_id")
     @JsonBackReference
+    @ToStringExclude
     private UsersEntity users;
 }

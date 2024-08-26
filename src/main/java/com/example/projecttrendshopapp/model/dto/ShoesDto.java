@@ -19,7 +19,7 @@ public class ShoesDto {
     @NotBlank
     private String colour;
     @NotBlank
-    private String marka;
+    private String marca;
     @NotNull
     @Size(min = 33, max = 45)
     private Integer size;

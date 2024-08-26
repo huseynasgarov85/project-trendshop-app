@@ -13,6 +13,6 @@ public interface TrousersMapper {
 
     TrousersEntity mapToEntity(TrousersDto trousersDto);
 
-    @Mapping(ignore = true, target = "id")
+    @Mapping(target = "id", ignore = true)
     TrousersEntity mapToEntity(@MappingTarget TrousersEntity trousersEntity, TrousersDto trousersDto);
 }

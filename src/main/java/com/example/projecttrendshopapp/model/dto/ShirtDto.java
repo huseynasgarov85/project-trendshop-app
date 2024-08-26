@@ -7,6 +7,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class ShirtDto {
     @NotBlank
     private String colour;
     @NotBlank
-    private String marka;
+    private String marca;
     @NotNull
     @PositiveOrZero
     private Double balance;

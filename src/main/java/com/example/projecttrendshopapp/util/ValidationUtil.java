@@ -27,7 +27,7 @@ public class ValidationUtil {
 
 
     public void checkUserEmail(UsersDto usersDto) {
-        var user = usersRepository.findByEmail(usersDto.getEmail());
+        var user = usersRepository.findByEmailOrUsername(usersDto.getEmail(),usersDto.getUsername());
         if (user.isPresent()) {
             throw new DuplicateUserException("Change your user email");
         }

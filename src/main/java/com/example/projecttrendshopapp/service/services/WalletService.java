@@ -1,4 +1,4 @@
-package com.example.projecttrendshopapp.service;
+package com.example.projecttrendshopapp.service.services;
 
 import com.example.projecttrendshopapp.dao.entity.BasketEntity;
 import com.example.projecttrendshopapp.dao.entity.OrderEntity;
@@ -28,6 +28,7 @@ public class WalletService {
     private final ValidationUtil validationUtil;
     private final CardsRepository cardsRepository;
     private final OrderService orderService;
+    private final EmailService emailService;
 
     @Transactional
     public void processPayment(PaymentMethod method, Long orderId, Long cardId) {
@@ -38,9 +39,11 @@ public class WalletService {
         switch (method) {
             case CARD:
                 paymentByCard(orderId, cardId, filteredBasketEntities);
+                emailService.sendToSuccessPayment(filteredBasketEntities);
                 break;
             case APPLICATION:
                 paymentByApplication(orderId, filteredBasketEntities);
+                emailService.sendToSuccessPayment(filteredBasketEntities);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value:" + method);
@@ -57,6 +60,7 @@ public class WalletService {
             OrderEntity order = orderRepository.findById(orderId).orElseThrow();
             order.setProductsPrice(amount);
             orderRepository.save(order);
+
             cardEntity.setCardBalance(cardEntity.getCardBalance() - amount);
         }
     }

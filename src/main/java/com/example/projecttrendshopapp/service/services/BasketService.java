@@ -1,5 +1,6 @@
-package com.example.projecttrendshopapp.service;
+package com.example.projecttrendshopapp.service.services;
 
+import com.example.projecttrendshopapp.dao.entity.BasketEntity;
 import com.example.projecttrendshopapp.dao.repository.*;
 import com.example.projecttrendshopapp.exception.NotFoundException;
 import com.example.projecttrendshopapp.mapper.BasketMapper;
@@ -8,8 +9,11 @@ import com.example.projecttrendshopapp.model.dto.BasketWithProductsDto;
 import com.example.projecttrendshopapp.model.enums.Products;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 
@@ -24,12 +28,12 @@ public class BasketService {
     private final TrousersRepository trousersRepository;
     private final ElectricalEquipmentRepository electricalEquipmentRepository;
 
-    public List<BasketDto> getAllBaskets() {
-        log.info("ActionLog.getAllBaskets.started");
-        var basketEntity = basketRepository.findAll();
-        var basketDto = basketEntity.stream().map(basketMapper::mapToDto).toList();
-        log.info("ActionLog.getAllBaskets.end");
-        return basketDto;
+    public Page<BasketDto> getAll(Pageable pageable) {
+        log.info("ActionLog.getAll.started");
+        Page<BasketEntity> basketEntity = basketRepository.findAll((org.springframework.data.domain.Pageable) pageable);
+        List<BasketDto>  basketDto = basketEntity.stream().map(basketMapper::mapToDto).toList();
+        log.info("ActionLog.getAll.end");
+        return new PageImpl<>(basketDto,basketEntity.getPageable(),basketEntity.getTotalElements());
     }
 
     public BasketWithProductsDto getById(Long basketId) {
@@ -52,27 +56,27 @@ public class BasketService {
         return basketWithProductsDto;
     }
 
-    public void addBasket(BasketDto basketDto) {
-        log.info("ActionLog.addBasket.started: basketDto {}", basketDto);
+    public void add(BasketDto basketDto) {
+        log.info("ActionLog.add.started: basketDto {}", basketDto);
         var basketEntity = basketMapper.mapToEntity(basketDto);
         basketRepository.save(basketEntity);
-        log.info("ActionLog.addBasket.end: basketDto {}", basketDto);
+        log.info("ActionLog.add.end: basketDto {}", basketDto);
     }
 
-    public void updateBasket(Long basketId, Long userId, BasketDto basketDto) {
-        log.info("ActionLog.updateBasket.started: basketId {},userId {}", basketId, userId);
+    public void update(Long basketId, Long userId, BasketDto basketDto) {
+        log.info("ActionLog.update.started: basketId {},userId {}", basketId, userId);
         var basketEntity = basketRepository.findById(basketId).orElseThrow(() -> new NotFoundException("basketId not found"));
         if (!basketEntity.getUser().getId().equals(userId)) {
             throw new NotFoundException("user not found");
         }
         var updateBasket = basketMapper.mapToEntity(basketEntity, basketDto);
         basketRepository.save(updateBasket);
-        log.info("ActionLog.updateBasket.started: basketId {},userId {}", basketId, userId);
+        log.info("ActionLog.update.started: basketId {},userId {}", basketId, userId);
     }
 
-    public void removeBasket(Long basketId) {
-        log.info("ActionLog.removeBasket.started: basketId {}", basketId);
+    public void remove(Long basketId) {
+        log.info("ActionLog.remove.started: basketId {}", basketId);
         basketRepository.deleteById(basketId);
-        log.info("ActionLog.removeBasket.end: basketId {}", basketId);
+        log.info("ActionLog.remove.end: basketId {}", basketId);
     }
 }

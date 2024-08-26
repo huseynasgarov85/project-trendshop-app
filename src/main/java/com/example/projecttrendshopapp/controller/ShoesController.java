@@ -1,8 +1,8 @@
 package com.example.projecttrendshopapp.controller;
 
 import com.example.projecttrendshopapp.model.dto.ShoesDto;
-import com.example.projecttrendshopapp.service.ShirtsService;
-import com.example.projecttrendshopapp.service.ShoesService;
+import com.example.projecttrendshopapp.model.dto.ShoesFilterDto;
+import com.example.projecttrendshopapp.service.services.ShoesService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("shoes")
+@RequestMapping("/shoes")
 @RequiredArgsConstructor
 public class ShoesController {
     private final ShoesService shoesService;
 
     @GetMapping
-    public List<ShoesDto> getAll() {
-        return shoesService.getAll();
+    public List<ShoesDto> getAll(ShoesFilterDto shoesFilterDto) {
+        return shoesService.getAll(shoesFilterDto);
     }
 
     @GetMapping("/{shoeId}")
@@ -26,17 +26,17 @@ public class ShoesController {
     }
 
     @PostMapping
-    public void addShoe(@RequestBody @Valid ShoesDto shoesDto){
-        shoesService.addShoe(shoesDto);
+    public void add(@RequestBody @Valid ShoesDto shoesDto){
+        shoesService.add(shoesDto);
     }
 
     @PutMapping("/{shoeId}")
-    public void updateShoe(@RequestBody @Valid ShoesDto shoesDto,@PathVariable Long shoeId){
-        shoesService.updateShoe(shoesDto,shoeId);
+    public void update(@RequestBody @Valid ShoesDto shoesDto,@PathVariable Long shoeId){
+        shoesService.update(shoesDto,shoeId);
     }
 
     @DeleteMapping("/{shoeId}")
-    public void removeShoe(@PathVariable Long shoeId){
-        shoesService.removeShoe(shoeId);
+    public void remove(@PathVariable Long shoeId){
+        shoesService.remove(shoeId);
     }
 }

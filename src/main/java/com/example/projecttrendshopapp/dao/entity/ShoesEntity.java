@@ -16,7 +16,7 @@ public class ShoesEntity {
     @Enumerated(EnumType.STRING)
     private ProductCategoryShoes productCategoryShoes;
     private String colour;
-    private String marka;
+    private String marca;
     private Integer size;
     private Double balance;
     private String name;

@@ -5,6 +5,7 @@ import com.example.projecttrendshopapp.exception.IllegalStateException;
 import com.example.projecttrendshopapp.model.dto.ExceptionDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -16,7 +17,7 @@ public class GlobalErrorHandler {
     @ExceptionHandler(InvalidBalanceException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionDto handleInvalidException(InvalidBalanceException e){
-        log.error("Action is failed: {}",e.getMessage());
+        log.error("ActionLog is failed: {}",e.getMessage());
         return new ExceptionDto(e.getMessage());
     }
 
@@ -50,6 +51,12 @@ public class GlobalErrorHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionDto handleIllegalStateException(IllegalStateException e){
         log.error("ActionLog is failed:{}",e.getMessage());
+        return new ExceptionDto(e.getMessage());
+    }
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ExceptionDto handleAccessDeniedException(AccessDeniedException e){
+        log.error("ActionLog is failed: {}",e.getMessage());
         return new ExceptionDto(e.getMessage());
     }
 

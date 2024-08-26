@@ -14,7 +14,7 @@ public class ElectricalEquipmentsDto {
     @NotNull
     private ProductCategoryElectricalEquipments productCategoryElectricalEquipments;
     @NotBlank
-    private String marka;
+    private String marca;
     @NotBlank
     private String name;
     @NotNull

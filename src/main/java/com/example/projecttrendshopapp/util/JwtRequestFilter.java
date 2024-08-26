@@ -1,6 +1,6 @@
 package com.example.projecttrendshopapp.util;
 
-import com.example.projecttrendshopapp.service.SecurityService;
+import com.example.projecttrendshopapp.service.services.SecurityService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,5 +50,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
         }
         chain.doFilter(request, response);
+
     }
 }

@@ -17,7 +17,7 @@ public class ShirtEntity {
     private ProductCategoryShirt productCategoryShirt;
     private String size;
     private String colour;
-    private String marka;
+    private String marca;
     private Double balance;
     private Long counter;
 }
