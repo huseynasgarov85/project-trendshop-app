@@ -11,9 +11,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 
@@ -30,7 +30,7 @@ public class BasketService {
 
     public Page<BasketDto> getAll(Pageable pageable) {
         log.info("ActionLog.getAll.started");
-        Page<BasketEntity> basketEntity = basketRepository.findAll((org.springframework.data.domain.Pageable) pageable);
+        Page<BasketEntity> basketEntity = basketRepository.findAll(pageable);
         List<BasketDto>  basketDto = basketEntity.stream().map(basketMapper::mapToDto).toList();
         log.info("ActionLog.getAll.end");
         return new PageImpl<>(basketDto,basketEntity.getPageable(),basketEntity.getTotalElements());

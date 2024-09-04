@@ -18,24 +18,28 @@ public class ShirtsController {
     private final ShirtsService shirtsService;
 
     @GetMapping
-    public Page<ShirtDto> getAll(ShirtFilterDto shirtFilterDto, @PageableDefault(size = 2) Pageable pageable){
-       return shirtsService.getAll(shirtFilterDto,pageable);
+    public Page<ShirtDto> getAll( @PageableDefault(size = 2) Pageable pageable, ShirtFilterDto shirtFilterDto) {
+        return shirtsService.getAll(shirtFilterDto, pageable);
     }
+
     @GetMapping("/{shirtId}")
-    public ShirtDto getById(@PathVariable Long shirtId){
+    public ShirtDto getById(@PathVariable Long shirtId) {
         return shirtsService.getById(shirtId);
     }
+
     @PostMapping
-    public void add(@RequestBody @Valid ShirtDto shirtDto){
+    public void add(@RequestBody @Valid ShirtDto shirtDto) {
         shirtsService.add(shirtDto);
     }
+
     @PutMapping("/{shirtId}")
-    public void update(@RequestBody @Valid ShirtDto shirtDto,@PathVariable Long shirtId){
-        shirtsService.update(shirtDto,shirtId);
+    public void update(@RequestBody @Valid ShirtDto shirtDto, @PathVariable Long shirtId) {
+        shirtsService.update(shirtDto, shirtId);
     }
+
     @DeleteMapping("/{shirtId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void remove(@PathVariable Long shirtId){
+    public void remove(@PathVariable Long shirtId) {
         shirtsService.remove(shirtId);
     }
 }

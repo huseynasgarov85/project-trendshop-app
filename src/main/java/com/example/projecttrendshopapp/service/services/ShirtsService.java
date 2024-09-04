@@ -30,7 +30,7 @@ public class ShirtsService {
         var specification = Specification.where(new BalanceSpecification(shirtFilterDto.getBalance()))
                 .and(new ColourSpecification(shirtFilterDto.getColour()))
                 .and(new CounterSpecification(shirtFilterDto.getCounter()))
-                .and(new SizeSpecification(shirtFilterDto.getSize()))
+                .and(new SizeSpecification(shirtFilterDto.getShirtSize()))
                 .and(new ProductCategory(shirtFilterDto.getProductCategoryShirt()))
                 .and(new MarcaSpecification(shirtFilterDto.getMarca()));
         Page<ShirtEntity> shirtsEntity = shirtsRepository.findAll(specification,pageable);
@@ -68,4 +68,5 @@ public class ShirtsService {
         shirtsRepository.deleteById(shirtId);
         log.info("ActionLog.remove.end:shirtId {}", shirtId);
     }
+
 }

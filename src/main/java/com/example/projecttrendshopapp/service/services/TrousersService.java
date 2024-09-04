@@ -9,6 +9,9 @@ import com.example.projecttrendshopapp.model.dto.TrousersFilterDto;
 import com.example.projecttrendshopapp.service.specification.trousers.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -21,18 +24,18 @@ public class TrousersService {
     private final TrousersRepository trousersRepository;
     private final TrousersMapper trousersMapper;
 
-    public List<TrousersDto> getAll(TrousersFilterDto trousersFilterDto) {
+    public Page<TrousersDto> getAll(TrousersFilterDto trousersFilterDto, Pageable pageable) {
         log.info("ActionLog.getAll.started");
-        Specification specification  = Specification.where(new ProductCategory(trousersFilterDto.getProductCategoryTrousers()))
-                .and(new SizeSpecification(trousersFilterDto.getSize()))
+        var specification  = Specification.where(new ProductCategory(trousersFilterDto.getProductCategoryTrousers()))
+                .and(new SizeSpecification(trousersFilterDto.getTrouserSize()))
                 .and(new ColourSpecification(trousersFilterDto.getColour()))
                 .and(new MarcaSpecification(trousersFilterDto.getMarca()))
                 .and(new PriceSpecification(trousersFilterDto.getPrice()))
                 .and(new CounterSpecification(trousersFilterDto.getCounter()));
-        List<TrousersEntity> trousersEntity = trousersRepository.findAll(specification);
+        Page<TrousersEntity> trousersEntity = trousersRepository.findAll(specification,pageable);
         var trouserDto = trousersEntity.stream().map(trousersMapper::mapToDto).toList();
         log.info("ActionLog.getAll.end");
-        return trouserDto;
+        return new PageImpl<>(trouserDto,trousersEntity.getPageable(),trousersEntity.getTotalElements());
     }
 
     public TrousersDto getById(Long trouserId) {

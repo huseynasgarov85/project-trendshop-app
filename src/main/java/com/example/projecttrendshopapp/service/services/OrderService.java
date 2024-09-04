@@ -13,6 +13,9 @@ import com.example.projecttrendshopapp.model.enums.Status;
 import com.example.projecttrendshopapp.util.ValidationUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,12 +38,12 @@ public class OrderService {
     private final UsersRepository usersRepository;
 
     @Transactional
-    public List<OrderDto> getAll() {
+    public Page<OrderDto> getAll(Pageable pageable) {
         log.info("ActionLog.getAll.started.");
-        var orderEntities = orderRepository.findAll();
+        var orderEntities = orderRepository.findAll(pageable);
         var orderDtoList = orderEntities.stream().map(this::getOrderDto).toList();
         log.info("ActionLog.getAll.end.");
-        return orderDtoList;
+        return new PageImpl<>(orderDtoList,orderEntities.getPageable(),orderEntities.getTotalElements());
     }
 
     public void create(Long userId, Long orderId) {

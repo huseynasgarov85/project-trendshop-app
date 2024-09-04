@@ -3,6 +3,9 @@ package com.example.projecttrendshopapp.controller;
 import com.example.projecttrendshopapp.model.dto.OrderDto;
 import com.example.projecttrendshopapp.service.services.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,8 +17,8 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
-    public List<OrderDto> getAll(){
-        return orderService.getAll();
+    public Page<OrderDto> getAll(@PageableDefault(size = 1) Pageable pageable){
+        return orderService.getAll(pageable);
     }
     @GetMapping("/{orderId}")
     public OrderDto getById(@PathVariable Long orderId){

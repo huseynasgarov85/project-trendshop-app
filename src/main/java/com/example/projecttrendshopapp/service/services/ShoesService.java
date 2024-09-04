@@ -10,6 +10,9 @@ import com.example.projecttrendshopapp.service.specification.shirts.*;
 import com.example.projecttrendshopapp.service.specification.shoes.NameSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -22,19 +25,19 @@ public class ShoesService {
     private final ShoesRepository shoesRepository;
     private final ShoesMapper shoesMapper;
 
-    public List<ShoesDto> getAll(ShoesFilterDto shoesFilterDto) {
+    public Page<ShoesDto> getAll(ShoesFilterDto shoesFilterDto, Pageable pageable) {
         log.info("ActionLog.getAll.start");
-        Specification specification = Specification.where(new MarcaSpecification(shoesFilterDto.getMarca()))
+        var specification = Specification.where(new MarcaSpecification(shoesFilterDto.getMarca()))
                 .and(new BalanceSpecification(shoesFilterDto.getBalance()))
                 .and(new ColourSpecification(shoesFilterDto.getColour()))
                 .and(new CounterSpecification(shoesFilterDto.getCount()))
-                .and(new com.example.projecttrendshopapp.service.specification.shoes.SizeSpecification(shoesFilterDto.getSize()))
+                .and(new com.example.projecttrendshopapp.service.specification.shoes.SizeSpecification(shoesFilterDto.getShoeSize()))
                 .and(new NameSpecification(shoesFilterDto.getName()))
                 .and(new com.example.projecttrendshopapp.service.specification.shoes.ProductCategory(shoesFilterDto.getProductCategoryShoes()));
-        List<ShoesEntity> shoesEntity = shoesRepository.findAll(specification);
+        Page<ShoesEntity> shoesEntity = shoesRepository.findAll(specification,pageable);
         var shoesDto = shoesEntity.stream().map(shoesMapper::mapToDto).toList();
         log.info("ActionLog.getAll.end");
-        return shoesDto;
+        return new PageImpl<>(shoesDto,shoesEntity.getPageable(),shoesEntity.getTotalElements());
     }
 
     public ShoesDto getById(Long shoeId) {

@@ -22,7 +22,7 @@ public class ShoesFilterDto {
     private String marca;
     @NotNull
     @Size(min = 33, max = 45)
-    private Integer size;
+    private Integer shoeSize;
     @NotNull
     @PositiveOrZero
     private Double balance;

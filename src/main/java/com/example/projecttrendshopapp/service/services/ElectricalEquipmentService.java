@@ -9,6 +9,9 @@ import com.example.projecttrendshopapp.model.dto.ElectricalEquipmentsFilterDto;
 import com.example.projecttrendshopapp.service.specification.electricalEquipments.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -22,17 +25,17 @@ public class ElectricalEquipmentService {
     private final ElectricalEquipmentMapper electricalEquipmentMapper;
 
 
-    public List<ElectricalEquipmentsDto> getAll(ElectricalEquipmentsFilterDto electricalEquipmentsFilterDto) {
+    public Page<ElectricalEquipmentsDto> getAll(ElectricalEquipmentsFilterDto electricalEquipmentsFilterDto, Pageable pageable) {
         log.info("ActionLog.getAll.started");
         var specification = Specification.where(new CounterSpecification(electricalEquipmentsFilterDto.getCounter()))
                 .and(new MarcaSpecification(electricalEquipmentsFilterDto.getMarca()))
                 .and(new NameSpecification(electricalEquipmentsFilterDto.getName()))
                 .and(new PriceSpecification(electricalEquipmentsFilterDto.getPrice()))
                 .and(new ProductCategory(electricalEquipmentsFilterDto.getProductCategoryElectricalEquipments()));
-        List<ElectricalEquipmentsEntity> electricalEquipmentsEntities = electricalEquipmentRepository.findAll(specification);
+        Page<ElectricalEquipmentsEntity> electricalEquipmentsEntities = electricalEquipmentRepository.findAll(specification, pageable);
         var electricalEquipmentsDtos = electricalEquipmentsEntities.stream().map(electricalEquipmentMapper::mapToDto).toList();
         log.info("ActionLog.getAll.started");
-        return electricalEquipmentsDtos;
+        return new PageImpl<>(electricalEquipmentsDtos,electricalEquipmentsEntities.getPageable(),electricalEquipmentsEntities.getTotalElements());
     }
 
     public ElectricalEquipmentsDto getById(Long electricalEquipmentId) {
@@ -52,7 +55,7 @@ public class ElectricalEquipmentService {
 
     public void update(ElectricalEquipmentsDto electricalEquipmentsDto, Long electricalEquipmentId) {
         log.info("ActionLog.update.started:electricalEquipmentId {}", electricalEquipmentId);
-        var electricalEquipmentsEntity = electricalEquipmentRepository.findById(electricalEquipmentId).orElseThrow(() ->new NotFoundException("ElectricalEquipment not found"));
+        var electricalEquipmentsEntity = electricalEquipmentRepository.findById(electricalEquipmentId).orElseThrow(() -> new NotFoundException("ElectricalEquipment not found"));
         var updateElectricalEquipment = electricalEquipmentMapper.mapToEntity(electricalEquipmentsEntity, electricalEquipmentsDto);
         electricalEquipmentRepository.save(updateElectricalEquipment);
         log.info("ActionLog.update.end:electricalEquipmentId {}", electricalEquipmentId);

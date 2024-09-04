@@ -15,7 +15,7 @@ public class ShirtFilterDto {
     @NotNull
     private ProductCategoryShirt productCategoryShirt;
     @NotNull
-    private String size;
+    private String shirtSize;
     @NotBlank
     private String colour;
     @NotBlank

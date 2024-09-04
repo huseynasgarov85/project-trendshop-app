@@ -22,7 +22,7 @@ public class TrousersFilterDto {
     private String marca;
     @NotNull
     @Size(min = 28, max = 46)
-    private Integer size;
+    private Integer trouserSize;
     @NotNull
     @PositiveOrZero
     private Double price;

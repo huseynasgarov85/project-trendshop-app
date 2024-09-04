@@ -54,4 +54,5 @@ public class AuthenticationController {
     public ResponseEntity<String> resetPasswordOtp(String otp, String newPassword, String reNewPassword) {
         return authenticationService.resetPasswordOtp(otp,newPassword,reNewPassword);
     }
+    //TODO login yazmaq yadan cixmasin
 }

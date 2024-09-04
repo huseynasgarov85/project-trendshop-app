@@ -5,6 +5,9 @@ import com.example.projecttrendshopapp.model.dto.ShoesFilterDto;
 import com.example.projecttrendshopapp.service.services.ShoesService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +19,8 @@ public class ShoesController {
     private final ShoesService shoesService;
 
     @GetMapping
-    public List<ShoesDto> getAll(ShoesFilterDto shoesFilterDto) {
-        return shoesService.getAll(shoesFilterDto);
+    public Page<ShoesDto> getAll(ShoesFilterDto shoesFilterDto, @PageableDefault(size = 2) Pageable pageable) {
+        return shoesService.getAll(shoesFilterDto,pageable);
     }
 
     @GetMapping("/{shoeId}")
@@ -26,17 +29,17 @@ public class ShoesController {
     }
 
     @PostMapping
-    public void add(@RequestBody @Valid ShoesDto shoesDto){
+    public void add(@RequestBody @Valid ShoesDto shoesDto) {
         shoesService.add(shoesDto);
     }
 
     @PutMapping("/{shoeId}")
-    public void update(@RequestBody @Valid ShoesDto shoesDto,@PathVariable Long shoeId){
-        shoesService.update(shoesDto,shoeId);
+    public void update(@RequestBody @Valid ShoesDto shoesDto, @PathVariable Long shoeId) {
+        shoesService.update(shoesDto, shoeId);
     }
 
     @DeleteMapping("/{shoeId}")
-    public void remove(@PathVariable Long shoeId){
+    public void remove(@PathVariable Long shoeId) {
         shoesService.remove(shoeId);
     }
 }

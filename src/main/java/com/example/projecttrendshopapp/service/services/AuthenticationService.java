@@ -26,7 +26,6 @@ public class AuthenticationService {
     private final OtpUtil otpUtil;
     private final EmailService emailService;
     private final OtpRepository otpRepository;
-    private final JwtTokenUtil jwtTokenUtil;
     private final PasswordEncoder passwordEncoder;
 
     public ResponseEntity<String> forgotPass(String email) {
@@ -50,7 +49,7 @@ public class AuthenticationService {
         log.info("ActionLog.started.resetPasswordOtp: otp {},newPassword {},reNewPassword {}", otp, newPassword, reNewPassword);
         OtpEntity otpEntity = otpRepository.findOtpEntityByOtp(otp).orElseThrow(()->new NotFoundException("this otp could not found"));
         LocalDateTime now = LocalDateTime.now();
-        if (otpEntity.getOtpDate().plusMinutes(2).isBefore(now)) {
+        if (otpEntity.getOtpDate().isBefore(now)) {
             otpEntity.setOtpStatus(OtpStatus.INACTIVE);
             otpRepository.save(otpEntity);
         }
