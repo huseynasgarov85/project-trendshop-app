@@ -1,7 +1,8 @@
 package com.example.projecttrendshopapp.controller;
 
-import com.example.projecttrendshopapp.model.enums.PaymentMethod;
-import com.example.projecttrendshopapp.service.services.WalletService;
+import com.example.projecttrendshopapp.enums.PaymentMethod;
+import com.example.projecttrendshopapp.service.serviceImpl.wallet.WalletImplService;
+import com.example.projecttrendshopapp.service.serviceImpl.wallet.WalletService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,6 @@ public class WalletController {
     public void paymentMethod(@RequestParam PaymentMethod method,
                               @RequestParam Long order,
                               @RequestParam(required = false) Long card) {
-        walletService.processPayment(method, order, card);
+        walletService.paymentMethod(method, order, card);
     }
 }

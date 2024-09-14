@@ -1,5 +1,5 @@
 package com.example.projecttrendshopapp.dao.entity;
-import com.example.projecttrendshopapp.model.enums.ProductCategoryShoes;
+import com.example.projecttrendshopapp.enums.ProductCategoryShoes;
 import jakarta.persistence.*;
 import lombok.*;
 @Entity

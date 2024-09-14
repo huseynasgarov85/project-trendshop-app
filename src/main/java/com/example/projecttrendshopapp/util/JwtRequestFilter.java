@@ -1,6 +1,6 @@
 package com.example.projecttrendshopapp.util;
 
-import com.example.projecttrendshopapp.service.services.SecurityService;
+import com.example.projecttrendshopapp.service.serviceImpl.security.SecurityService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

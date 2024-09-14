@@ -1,5 +1,5 @@
 package com.example.projecttrendshopapp.dao.entity;
-import com.example.projecttrendshopapp.model.enums.ProductCategoryElectricalEquipments;
+import com.example.projecttrendshopapp.enums.ProductCategoryElectricalEquipments;
 import jakarta.persistence.*;
 import lombok.*;
 @Entity
@@ -16,7 +16,6 @@ public class ElectricalEquipmentsEntity {
     @Enumerated(EnumType.STRING)
     private ProductCategoryElectricalEquipments productCategoryElectricalEquipments;
     private String marca;
-    private String name;
     private Long count;
     private Double price;
 }

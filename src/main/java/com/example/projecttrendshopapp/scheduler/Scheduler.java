@@ -1,8 +1,8 @@
 package com.example.projecttrendshopapp.scheduler;
 
 import com.example.projecttrendshopapp.dao.repository.OtpRepository;
-import com.example.projecttrendshopapp.model.enums.OtpStatus;
-import com.example.projecttrendshopapp.service.services.OrderService;
+import com.example.projecttrendshopapp.enums.OtpStatus;
+import com.example.projecttrendshopapp.service.serviceImpl.order.OrderImplService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -14,12 +14,12 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Slf4j
 public class Scheduler {
-    private final OrderService orderService;
+    private final OrderImplService orderImplService;
     private final OtpRepository otpRepository;
 
     @Scheduled(cron = "0 0 1 * * *")
     public void cashBackScheduler() {
-        orderService.generateCashBack().forEach(it -> {
+        orderImplService.generateCashBack().forEach(it -> {
             log.info("Congratulations, since the value of your face is more than 500 manats, userId: {} will receive 5 percent cashback and free shipping,balance is: {}", it.getId(), it.getBalance());
         });
     }

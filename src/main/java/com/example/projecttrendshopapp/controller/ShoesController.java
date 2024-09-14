@@ -1,16 +1,15 @@
 package com.example.projecttrendshopapp.controller;
 
-import com.example.projecttrendshopapp.model.dto.ShoesDto;
-import com.example.projecttrendshopapp.model.dto.ShoesFilterDto;
-import com.example.projecttrendshopapp.service.services.ShoesService;
+import com.example.projecttrendshopapp.dto.ShoesDto;
+import com.example.projecttrendshopapp.dto.ShoesFilterDto;
+import com.example.projecttrendshopapp.service.serviceImpl.shoes.ShoesImplService;
+import com.example.projecttrendshopapp.service.serviceImpl.shoes.ShoesService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/shoes")

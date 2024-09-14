@@ -1,15 +1,15 @@
 package com.example.projecttrendshopapp.controller;
 
-import com.example.projecttrendshopapp.model.dto.ShirtDto;
-import com.example.projecttrendshopapp.model.dto.ShirtFilterDto;
-import com.example.projecttrendshopapp.service.services.ShirtsService;
+import com.example.projecttrendshopapp.dto.ShirtDto;
+import com.example.projecttrendshopapp.dto.ShirtFilterDto;
+import com.example.projecttrendshopapp.service.serviceImpl.shirt.ShirtsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.data.domain.Pageable;
 
 @RestController
 @RequestMapping("/shirts")
@@ -18,8 +18,8 @@ public class ShirtsController {
     private final ShirtsService shirtsService;
 
     @GetMapping
-    public Page<ShirtDto> getAll( @PageableDefault(size = 2) Pageable pageable, ShirtFilterDto shirtFilterDto) {
-        return shirtsService.getAll(shirtFilterDto, pageable);
+    public Page<ShirtDto> getAll(@PageableDefault(size = 9) Pageable pageable, ShirtFilterDto shirtFilterDto) {
+        return shirtsService.getAll(pageable, shirtFilterDto);
     }
 
     @GetMapping("/{shirtId}")

@@ -1,8 +1,9 @@
 package com.example.projecttrendshopapp.controller;
 
-import com.example.projecttrendshopapp.model.dto.SendToUserBalanceDto;
-import com.example.projecttrendshopapp.model.dto.UsersDto;
-import com.example.projecttrendshopapp.service.services.UsersService;
+import com.example.projecttrendshopapp.dto.SendToUserBalanceDto;
+import com.example.projecttrendshopapp.dto.UsersDto;
+import com.example.projecttrendshopapp.service.serviceImpl.user.UserService;
+import com.example.projecttrendshopapp.service.serviceImpl.user.UsersImplService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import java.util.List;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UsersController {
-    private final UsersService usersService;
+    private final UserService usersService;
 
     @GetMapping
     public List<UsersDto> getAll() {
@@ -57,8 +58,4 @@ public class UsersController {
     public void sendToUserBalance(@PathVariable Long userId, SendToUserBalanceDto sendToUserBalanceDto){
         usersService.sendToUserBalance(userId,sendToUserBalanceDto);
     }
-
-
-
-
 }

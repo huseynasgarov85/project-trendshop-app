@@ -1,6 +1,6 @@
 package com.example.projecttrendshopapp.dao.entity;
 
-import com.example.projecttrendshopapp.model.enums.Products;
+import com.example.projecttrendshopapp.enums.Products;
 import jakarta.persistence.*;
 import lombok.*;
 

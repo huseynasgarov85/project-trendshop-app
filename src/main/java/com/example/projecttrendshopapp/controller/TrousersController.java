@@ -1,16 +1,14 @@
 package com.example.projecttrendshopapp.controller;
 
-import com.example.projecttrendshopapp.model.dto.TrousersDto;
-import com.example.projecttrendshopapp.model.dto.TrousersFilterDto;
-import com.example.projecttrendshopapp.service.services.TrousersService;
+import com.example.projecttrendshopapp.dto.TrousersDto;
+import com.example.projecttrendshopapp.dto.TrousersFilterDto;
+import com.example.projecttrendshopapp.service.serviceImpl.trousers.TrousersService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/trousers")
@@ -20,7 +18,7 @@ public class TrousersController {
 
     @GetMapping
     public Page<TrousersDto> getAll(TrousersFilterDto trousersFilterDto, @PageableDefault(size = 2) Pageable pageable) {
-        return trousersService.getAll(trousersFilterDto,pageable);
+        return trousersService.getAll(trousersFilterDto, pageable);
     }
 
     @GetMapping("/{trouserId}")

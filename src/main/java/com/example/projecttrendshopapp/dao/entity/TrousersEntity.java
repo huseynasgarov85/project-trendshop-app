@@ -1,5 +1,5 @@
 package com.example.projecttrendshopapp.dao.entity;
-import com.example.projecttrendshopapp.model.enums.ProductCategoryTrousers;
+import com.example.projecttrendshopapp.enums.ProductCategoryTrousers;
 import jakarta.persistence.*;
 import lombok.*;
 @Entity

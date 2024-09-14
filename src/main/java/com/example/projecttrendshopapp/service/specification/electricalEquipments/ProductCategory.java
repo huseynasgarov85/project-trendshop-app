@@ -1,7 +1,6 @@
 package com.example.projecttrendshopapp.service.specification.electricalEquipments;
 
-import com.example.projecttrendshopapp.model.enums.ProductCategoryElectricalEquipments;
-import com.example.projecttrendshopapp.model.enums.ProductCategoryShirt;
+import com.example.projecttrendshopapp.enums.ProductCategoryElectricalEquipments;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;

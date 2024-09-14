@@ -1,11 +1,9 @@
 package com.example.projecttrendshopapp.controller;
 
-import com.example.projecttrendshopapp.model.dto.FavoritesProductDto;
-import com.example.projecttrendshopapp.service.services.FavoritesProductService;
+import com.example.projecttrendshopapp.dto.FavoritesProductDto;
+import com.example.projecttrendshopapp.service.serviceImpl.favoritesProduct.FavoritesProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

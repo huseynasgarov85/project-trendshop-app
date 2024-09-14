@@ -1,7 +1,6 @@
 package com.example.projecttrendshopapp.service.specification.trousers;
 
-import com.example.projecttrendshopapp.model.enums.ProductCategoryShoes;
-import com.example.projecttrendshopapp.model.enums.ProductCategoryTrousers;
+import com.example.projecttrendshopapp.enums.ProductCategoryTrousers;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;

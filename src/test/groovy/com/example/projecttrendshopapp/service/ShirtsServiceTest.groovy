@@ -3,8 +3,8 @@ package com.example.projecttrendshopapp.service
 import com.example.projecttrendshopapp.dao.entity.ShirtEntity
 import com.example.projecttrendshopapp.dao.repository.ShirtsRepository
 import com.example.projecttrendshopapp.mapper.ShirtsMapper
-import com.example.projecttrendshopapp.model.dto.ShirtDto
-import com.example.projecttrendshopapp.service.services.ShirtsService
+import com.example.projecttrendshopapp.dto.ShirtDto
+import com.example.projecttrendshopapp.service.serviceImpl.shirt.ShirtsImplService
 import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
 import spock.lang.Specification
@@ -12,13 +12,13 @@ import spock.lang.Specification
 class ShirtsServiceTest extends Specification {
     private ShirtsRepository shirtsRepository
     private ShirtsMapper shirtsMapper
-    private ShirtsService shirtsService
+    private ShirtsImplService shirtsService
     private EnhancedRandom random = EnhancedRandomBuilder.aNewEnhancedRandom()
 
     void setup() {
         shirtsRepository = Mock()
         shirtsMapper = Mock()
-        shirtsService = new ShirtsService(shirtsRepository,shirtsMapper)
+        shirtsService = new ShirtsImplService(shirtsRepository,shirtsMapper)
     }
 
     def "GetAll"() {

@@ -6,9 +6,9 @@ import com.example.projecttrendshopapp.dao.entity.UsersEntity
 import com.example.projecttrendshopapp.dao.repository.CardsRepository
 import com.example.projecttrendshopapp.dao.repository.UsersRepository
 import com.example.projecttrendshopapp.mapper.UsersMapper
-import com.example.projecttrendshopapp.model.dto.SendToUserBalanceDto
-import com.example.projecttrendshopapp.model.dto.UsersDto
-import com.example.projecttrendshopapp.service.services.UsersService
+import com.example.projecttrendshopapp.dto.SendToUserBalanceDto
+import com.example.projecttrendshopapp.dto.UsersDto
+import com.example.projecttrendshopapp.service.serviceImpl.user.UsersImplService
 import com.example.projecttrendshopapp.util.ValidationUtil
 import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
@@ -21,7 +21,7 @@ class UsersServiceTest extends Specification {
     private CardsRepository cardsRepository
     private ValidationUtil validationUtil
     private PasswordEncoder passwordEncoder
-    private UsersService usersService
+    private UsersImplService usersService
     EnhancedRandom random = EnhancedRandomBuilder.aNewEnhancedRandom()
 
     void setup() {
@@ -30,7 +30,7 @@ class UsersServiceTest extends Specification {
         cardsRepository = Mock()
         validationUtil = Mock()
         passwordEncoder = Mock()
-        usersService = new UsersService(usersRepository, usersMapper, cardsRepository, validationUtil, passwordEncoder)
+        usersService = new UsersImplService(usersRepository, usersMapper, cardsRepository, validationUtil, passwordEncoder)
     }
 
     def GetAll() {

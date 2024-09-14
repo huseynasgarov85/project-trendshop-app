@@ -1,7 +1,7 @@
 package com.example.projecttrendshopapp.mapper;
 
 import com.example.projecttrendshopapp.dao.entity.CardsEntity;
-import com.example.projecttrendshopapp.model.dto.CardsDto;
+import com.example.projecttrendshopapp.dto.CardsDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

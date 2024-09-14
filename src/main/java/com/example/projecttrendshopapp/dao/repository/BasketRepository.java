@@ -1,7 +1,7 @@
 package com.example.projecttrendshopapp.dao.repository;
 
 import com.example.projecttrendshopapp.dao.entity.BasketEntity;
-import com.example.projecttrendshopapp.model.enums.Status;
+import com.example.projecttrendshopapp.enums.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

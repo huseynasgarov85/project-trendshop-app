@@ -1,7 +1,7 @@
 package com.example.projecttrendshopapp.mapper;
 
 import com.example.projecttrendshopapp.dao.entity.*;
-import com.example.projecttrendshopapp.model.dto.*;
+import com.example.projecttrendshopapp.dto.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -17,8 +17,12 @@ public interface BasketMapper {
     BasketEntity mapToEntity(BasketDto basketDto);
 
     BasketEntity mapToEntity(@MappingTarget BasketEntity basketEntity, BasketDto basketDto);
-    ShoesDto mapShoesEntityToDto(ShoesEntity shoesEntity,Long basketId);
-    TrousersDto mapTrousersEntityToDto(TrousersEntity trousersEntity,Long basketId);
-    ElectricalEquipmentsDto mapElectricalEntityToDto(ElectricalEquipmentsEntity electricalEquipmentsEntity,Long basketId);
-    ShirtDto mapShirtEntityToDto(ShirtEntity shirtEntity,Long basketId);
+
+    ShoesDto mapShoesEntityToDto(ShoesEntity shoesEntity, Long basketId);
+
+    TrousersDto mapTrousersEntityToDto(TrousersEntity trousersEntity, Long basketId);
+
+    ElectricalEquipmentsDto mapElectricalEntityToDto(ElectricalEquipmentsEntity electricalEquipmentsEntity, Long basketId);
+
+    ShirtDto mapShirtEntityToDto(ShirtEntity shirtEntity, Long basketId);
 }

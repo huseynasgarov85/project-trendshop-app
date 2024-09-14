@@ -1,7 +1,7 @@
 package com.example.projecttrendshopapp.controller;
 
-import com.example.projecttrendshopapp.model.dto.CardsDto;
-import com.example.projecttrendshopapp.service.services.CardService;
+import com.example.projecttrendshopapp.dto.CardsDto;
+import com.example.projecttrendshopapp.service.serviceImpl.card.CardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

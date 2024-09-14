@@ -1,14 +1,12 @@
 package com.example.projecttrendshopapp.controller;
 
-import com.example.projecttrendshopapp.model.dto.OrderDto;
-import com.example.projecttrendshopapp.service.services.OrderService;
+import com.example.projecttrendshopapp.dto.OrderDto;
+import com.example.projecttrendshopapp.service.serviceImpl.order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequestMapping("/order")
 @RestController

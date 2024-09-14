@@ -2,20 +2,19 @@ package com.example.projecttrendshopapp.util;
 
 import com.example.projecttrendshopapp.dao.entity.BasketEntity;
 import com.example.projecttrendshopapp.dao.repository.*;
-import com.example.projecttrendshopapp.exception.DuplicateUserException;
-import com.example.projecttrendshopapp.exception.InvalidBalanceException;
-import com.example.projecttrendshopapp.exception.NotFoundException;
-import com.example.projecttrendshopapp.exception.OutOfStockException;
-import com.example.projecttrendshopapp.model.dto.UsersDto;
-import com.example.projecttrendshopapp.model.enums.Products;
-import com.example.projecttrendshopapp.model.enums.Status;
+import com.example.projecttrendshopapp.exception.*;
+import com.example.projecttrendshopapp.dto.UsersDto;
+import com.example.projecttrendshopapp.enums.Products;
+import com.example.projecttrendshopapp.enums.Status;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ValidationUtil {
     private final UsersRepository usersRepository;
     private final ShirtsRepository shirtsRepository;
@@ -27,9 +26,9 @@ public class ValidationUtil {
 
 
     public void checkUserEmail(UsersDto usersDto) {
-        var user = usersRepository.findByEmailOrUsername(usersDto.getEmail(),usersDto.getUsername());
+        var user = usersRepository.findByEmailOrUsername(usersDto.getEmail(), usersDto.getUsername());
         if (user.isPresent()) {
-            throw new DuplicateUserException("Change your user email");
+            throw new AlreadyExistsException("User already exists with " + usersDto.getEmail());
         }
     }
 
@@ -64,7 +63,7 @@ public class ValidationUtil {
 
     public void checkPaymentByApplication(Long orderId) {
         var orderEntity = orderRepository.findById(orderId).orElseThrow(() -> new NotFoundException("orderId not found"));
-       var amount = checkProductAndBalance(orderId);
+        var amount = checkProductAndBalance(orderId);
         if (amount > orderEntity.getUsers().getBalance()) {
             throw new InvalidBalanceException("insufficient funds");
         }

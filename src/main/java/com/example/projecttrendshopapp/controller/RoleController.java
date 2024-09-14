@@ -1,6 +1,6 @@
 package com.example.projecttrendshopapp.controller;
 
-import com.example.projecttrendshopapp.service.services.RoleService;
+import com.example.projecttrendshopapp.service.serviceImpl.role.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

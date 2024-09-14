@@ -1,16 +1,15 @@
 package com.example.projecttrendshopapp.controller;
 
-import com.example.projecttrendshopapp.model.dto.ElectricalEquipmentsDto;
-import com.example.projecttrendshopapp.model.dto.ElectricalEquipmentsFilterDto;
-import com.example.projecttrendshopapp.service.services.ElectricalEquipmentService;
+import com.example.projecttrendshopapp.dto.ElectricalEquipmentsDto;
+import com.example.projecttrendshopapp.dto.ElectricalEquipmentsFilterDto;
+import com.example.projecttrendshopapp.service.serviceImpl.electricalEquipment.ElectricalEquipmentImplService;
+import com.example.projecttrendshopapp.service.serviceImpl.electricalEquipment.ElectricalEquipmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/electricalEquipment")
@@ -19,7 +18,7 @@ public class ElectricalEquipmentController {
     private final ElectricalEquipmentService electricalEquipmentService;
 
     @GetMapping
-    public Page<ElectricalEquipmentsDto> getAll(ElectricalEquipmentsFilterDto electricalEquipmentsFilterDto, @PageableDefault(size = 2) Pageable pageable) {
+    public Page<ElectricalEquipmentsDto> getAll(ElectricalEquipmentsFilterDto electricalEquipmentsFilterDto, @PageableDefault(size = 1) Pageable pageable) {
         return electricalEquipmentService.getAll(electricalEquipmentsFilterDto, pageable);
     }
 
