@@ -11,6 +11,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 public interface CardMapper {
     CardsEntity mapToEntity(CardsDto cardsDto);
 
+
     CardsDto mapToDto(CardsEntity cardsEntity);
 
     @Mapping(ignore = true, target = "id")

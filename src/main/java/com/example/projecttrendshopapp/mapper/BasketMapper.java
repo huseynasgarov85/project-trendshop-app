@@ -9,11 +9,13 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface BasketMapper {
+    @Mapping(source = "order.id",target = "orderId")
     BasketDto mapToDto(BasketEntity basketEntity);
 
     @Mapping(source = "productId", target = "product", ignore = true)
     BasketWithProductsDto mapToDtoV2(BasketEntity basketEntity);
 
+    @Mapping(source = "orderId", target = "order.id")
     BasketEntity mapToEntity(BasketDto basketDto);
 
     BasketEntity mapToEntity(@MappingTarget BasketEntity basketEntity, BasketDto basketDto);

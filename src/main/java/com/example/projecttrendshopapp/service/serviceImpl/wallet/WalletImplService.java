@@ -60,8 +60,12 @@ public class WalletImplService implements WalletService {
         validationUtil.checkPaymentByCard(orderId, cardId);
         var amount = generalPayment(filteredBasketEntities);
         var cardEntity = cardsRepository.findById(cardId).orElseThrow(() -> new NotFoundException("cardId not found"));
+        var orderEntity = orderRepository.findById(orderId).orElseThrow(() -> new NotFoundException("orerId not found"));
         if (cardEntity.getExpireDate().isBefore(LocalDate.now())) {
             throw new ExpiredCardException("The card has expired.");
+        }
+        if (orderEntity.getProductsPrice() > 150){
+            orderEntity.setFreeDelivery(Boolean.TRUE);
         }
         if (amount < cardEntity.getCardBalance()) {
             OrderEntity order = orderRepository.findById(orderId).orElseThrow();

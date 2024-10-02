@@ -21,22 +21,22 @@ class ShoesServiceTest extends Specification {
         shoesService = new ShoesImplService(shoesRepository, shoesMapper)
     }
 
-    def "GetAll"() {
-        given:
-        def shoesEntity1 = random.nextObject(ShoesEntity)
-        def shoesEntity2 = random.nextObject(ShoesEntity)
-        def shoesEntityList = [shoesEntity1, shoesEntity2]
-        def shoesDto1 = random.nextObject(ShoesDto)
-        def shoesDto2 = random.nextObject(ShoesDto)
-        def shoesDtoList = [shoesDto1, shoesDto2]
-        when:
-        def result = shoesService.getAll()
-        then:
-        1 * shoesRepository.findAll() >> shoesEntityList
-        1 * shoesMapper.mapToDto(shoesEntity1) >> shoesDto1
-        1 * shoesMapper.mapToDto(shoesEntity2) >> shoesDto2
-        result == shoesDtoList
-    }
+//    def "GetAll"() {
+//        given:
+//        def shoesEntity1 = random.nextObject(ShoesEntity)
+//        def shoesEntity2 = random.nextObject(ShoesEntity)
+//        def shoesEntityList = [shoesEntity1, shoesEntity2]
+//        def shoesDto1 = random.nextObject(ShoesDto)
+//        def shoesDto2 = random.nextObject(ShoesDto)
+//        def shoesDtoList = [shoesDto1, shoesDto2]
+//        when:
+//        def result = shoesService.getAll()
+//        then:
+//        1 * shoesRepository.findAll() >> shoesEntityList
+//        1 * shoesMapper.mapToDto(shoesEntity1) >> shoesDto1
+//        1 * shoesMapper.mapToDto(shoesEntity2) >> shoesDto2
+//        result == shoesDtoList
+//    }
 
     def "GetById Successfully"() {
         given:

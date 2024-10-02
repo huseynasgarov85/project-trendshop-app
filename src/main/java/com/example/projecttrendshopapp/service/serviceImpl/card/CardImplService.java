@@ -24,7 +24,7 @@ public class CardImplService implements CardService {
         log.info("ActionLog.getAll.started");
         var cardsEntity = cardsRepository.findAll();
         var cardsDto = cardsEntity.stream().map(cardMapper::mapToDto).toList();
-        log.info("ActionLog.getAll.started");
+        log.info("ActionLog.getAll.end");
         return cardsDto;
     }
 
@@ -58,7 +58,7 @@ public class CardImplService implements CardService {
     public void remove(Long cardId) {
         log.info("ActionLog.remove.started:cardId {}", cardId);
         cardsRepository.deleteById(cardId);
-        log.info("ActionLog.remove.started:cardId {}", cardId);
+        log.info("ActionLog.remove.end:cardId {}", cardId);
     }
 
     @Override

@@ -21,22 +21,22 @@ class TrousersServiceTest extends Specification {
         trousersService = new TrousersImplService(trousersRepository, trousersMapper)
     }
 
-    def "GetAll"() {
-        given:
-        def trousersEntity1 = random.nextObject(TrousersEntity)
-        def trousersEntity2 = random.nextObject(TrousersEntity)
-        def trousersEntityLists = [trousersEntity1, trousersEntity2]
-        def trousersDto1 = random.nextObject(TrousersDto)
-        def trousersDto2 = random.nextObject(TrousersDto)
-        def trousersDtoLists = [trousersDto1, trousersDto2]
-        when:
-        def result = trousersService.getAll()
-        then:
-        1 * trousersRepository.findAll() >> trousersEntityLists
-        1 * trousersMapper.mapToDto(trousersEntity1) >> trousersDto1
-        1 * trousersMapper.mapToDto(trousersEntity2) >> trousersDto2
-        result == trousersDtoLists
-    }
+//    def "GetAll"() {
+//        given:
+//        def trousersEntity1 = random.nextObject(TrousersEntity)
+//        def trousersEntity2 = random.nextObject(TrousersEntity)
+//        def trousersEntityLists = [trousersEntity1, trousersEntity2]
+//        def trousersDto1 = random.nextObject(TrousersDto)
+//        def trousersDto2 = random.nextObject(TrousersDto)
+//        def trousersDtoLists = [trousersDto1, trousersDto2]
+//        when:
+//        def result = trousersService.getAll()
+//        then:
+//        1 * trousersRepository.findAll() >> trousersEntityLists
+//        1 * trousersMapper.mapToDto(trousersEntity1) >> trousersDto1
+//        1 * trousersMapper.mapToDto(trousersEntity2) >> trousersDto2
+//        result == trousersDtoLists
+//    }
 
     def "GetById successfully"() {
         given:

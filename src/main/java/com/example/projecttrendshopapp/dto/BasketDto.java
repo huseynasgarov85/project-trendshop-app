@@ -1,5 +1,6 @@
 package com.example.projecttrendshopapp.dto;
 
+import com.example.projecttrendshopapp.dao.entity.OrderEntity;
 import com.example.projecttrendshopapp.enums.Products;
 import com.example.projecttrendshopapp.enums.Status;
 import jakarta.validation.constraints.NotNull;
@@ -7,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -22,4 +25,8 @@ public class BasketDto {
     private UsersDto user;
     @NotNull
     private Long productId;
+    @NotNull
+    private LocalDate placingOfTheGoodsTime;
+    @NotNull
+    private Long orderId;
 }

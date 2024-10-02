@@ -2,6 +2,7 @@ package com.example.projecttrendshopapp.config;
 
 import com.example.projecttrendshopapp.service.serviceImpl.security.SecurityService;
 import com.example.projecttrendshopapp.util.JwtRequestFilter;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -90,6 +91,9 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/authenticate").permitAll()
                         .anyRequest().authenticated()
                 )
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .authenticationEntryPoint(((request, response, authException) ->
+                                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED))))
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );

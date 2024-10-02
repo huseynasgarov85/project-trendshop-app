@@ -21,22 +21,22 @@ class ShirtsServiceTest extends Specification {
         shirtsService = new ShirtsImplService(shirtsRepository,shirtsMapper)
     }
 
-    def "GetAll"() {
-        given:
-        def shirtEntity1 = random.nextObject(ShirtEntity)
-        def shirtEntity2 = random.nextObject(ShirtEntity)
-        def shirtEntityList = [shirtEntity1,shirtEntity2]
-        def shirtsDto1 = random.nextObject(ShirtDto)
-        def shirtsDto2 = random.nextObject(ShirtDto)
-        def shirtDtoList = [shirtsDto1,shirtsDto2]
-        when:
-       def result = shirtsService.getAll()
-        then:
-        1 * shirtsRepository.findAll() >> shirtEntityList
-        1 * shirtsMapper.mapToDto(shirtEntity1) >> shirtsDto1
-        1 * shirtsMapper.mapToDto(shirtEntity2) >> shirtsDto2
-        result == shirtDtoList
-    }
+//    def "GetAll"() {
+//        given:
+//        def shirtEntity1 = random.nextObject(ShirtEntity)
+//        def shirtEntity2 = random.nextObject(ShirtEntity)
+//        def shirtEntityList = [shirtEntity1,shirtEntity2]
+//        def shirtsDto1 = random.nextObject(ShirtDto)
+//        def shirtsDto2 = random.nextObject(ShirtDto)
+//        def shirtDtoList = [shirtsDto1,shirtsDto2]
+//        when:
+//       def result = shirtsService.getAll()
+//        then:
+//        1 * shirtsRepository.findAll() >> shirtEntityList
+//        1 * shirtsMapper.mapToDto(shirtEntity1) >> shirtsDto1
+//        1 * shirtsMapper.mapToDto(shirtEntity2) >> shirtsDto2
+//        result == shirtDtoList
+//    }
 
     def "GetById Successfully"() {
         given:

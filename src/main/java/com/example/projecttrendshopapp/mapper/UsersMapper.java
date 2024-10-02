@@ -9,7 +9,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface UsersMapper {
-
+    @Mapping(ignore = true, target = "cards.userId")
     UsersDto mapToDto(UsersEntity usersEntity);
 
     UsersEntity mapToEntity(UsersDto usersDto);
