@@ -4,24 +4,27 @@ import com.example.projecttrendshopapp.dao.entity.RoleEntity;
 import com.example.projecttrendshopapp.dao.entity.UsersEntity;
 import com.example.projecttrendshopapp.dao.repository.UsersRepository;
 import com.example.projecttrendshopapp.exception.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Component
+@Service
+@RequiredArgsConstructor
 public class SecurityService implements UserDetailsService {
     private final UsersRepository usersRepository;
 
-    public SecurityService(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
+//    public SecurityService(UsersRepository usersRepository) {
+//        this.usersRepository = usersRepository;
+//    }
 
 
     @Override
