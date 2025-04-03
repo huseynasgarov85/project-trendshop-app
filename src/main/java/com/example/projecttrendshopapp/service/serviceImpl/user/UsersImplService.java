@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -101,7 +102,7 @@ public class UsersImplService implements UserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void sendToUserBalance(Long userId, SendToUserBalanceDto sendToUserBalanceDto) {
         log.info("ActionLog.sendToBalance.started:userId {},sendToUserBalanceDto {}", userId, sendToUserBalanceDto);
         var userEntity = usersRepository.findById(userId).orElseThrow(() -> new NotFoundException("userId not found"));

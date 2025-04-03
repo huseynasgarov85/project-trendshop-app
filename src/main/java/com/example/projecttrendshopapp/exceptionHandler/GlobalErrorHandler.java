@@ -14,6 +14,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class GlobalErrorHandler {
 
+    @ExceptionHandler(AuthenticationException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ExceptionDto handleAuthenticatedException(AuthenticationException e) {
+        log.error("ActionLog error " + e.getMessage());
+        return new ExceptionDto(e.getMessage());
+    }
+
     @ExceptionHandler(InvalidBalanceException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionDto handleInvalidException(InvalidBalanceException e) {
@@ -67,13 +74,6 @@ public class GlobalErrorHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     public ExceptionDto handleAlreadyExistsException(AlreadyExistsException e) {
         log.error("ActionLog is failed: {}", e.getMessage());
-        return new ExceptionDto(e.getMessage());
-    }
-
-    @ExceptionHandler(AuthenticationException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ExceptionDto handleAuthenticatedException(AuthenticationException e) {
-        log.error("ActionLog error " + e.getMessage());
         return new ExceptionDto(e.getMessage());
     }
 

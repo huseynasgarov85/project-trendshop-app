@@ -19,8 +19,8 @@ public class JwtTokenUtil {
 
     private final String SECRET_KEY = "secret";
 
-//    @Value("${secret.key}")
-//    private String SECRET_KEY;
+//    @Value("${spring.secret.key}")
+//    private String string;
 
     // Bu metod, tokenden userin adını cixarmaq ucun istifade olunur
     public String extractUsername(String token) {

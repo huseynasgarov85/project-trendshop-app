@@ -29,9 +29,9 @@ public class UsersEntity {
     @Enumerated(EnumType.STRING)
     private GenderCategory genderCategory;
     private Double balance;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users", fetch = FetchType.EAGER)
     private List<CardsEntity> cards;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     @JsonBackReference
     private List<RoleEntity> roles;
     private LocalDate dateOfCreation;

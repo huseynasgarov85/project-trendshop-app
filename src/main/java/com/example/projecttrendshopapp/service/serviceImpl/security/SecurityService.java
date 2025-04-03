@@ -10,7 +10,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,11 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityService implements UserDetailsService {
     private final UsersRepository usersRepository;
-
-//    public SecurityService(UsersRepository usersRepository) {
-//        this.usersRepository = usersRepository;
-//    }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws NotFoundException {
